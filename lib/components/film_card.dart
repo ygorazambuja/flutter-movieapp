@@ -17,10 +17,12 @@ class FilmCard extends StatelessWidget {
             color: Colors.black87,
             child: Column(
               children: <Widget>[
-                Image.network(
-                  '$IMAGE_BASE_URL${film.posterPath}',
-                  fit: BoxFit.fitWidth,
-                ),
+                film.posterPath != null
+                    ? Image.network(
+                        '$IMAGE_BASE_URL${film.posterPath}',
+                        fit: BoxFit.fitWidth,
+                      )
+                    : null,
                 Container(
                     padding: EdgeInsets.only(top: 5),
                     child: RatingBar(

@@ -82,4 +82,17 @@ class Api {
 
     return actorParticipation;
   }
+
+  Future<List<Film>> searchFilm(String searchParam) async {
+    final _endpoint = '$SEARCH_MOVIE$API_KEY$QUERY$searchParam';
+    Response response = await _client.request(_endpoint);
+    List<Film> films = List<Film>();
+
+    for (Map<String, dynamic> json in response.data['results']) {
+      Film film = Film.fromJson(json);
+      films.add(film);
+    }
+
+    return films;
+  }
 }

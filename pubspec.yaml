@@ -17,9 +17,9 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-  json_annotation: ^3.0.1
-  dio: ^3.0.8
-  flutter_rating_bar: 3.0.0+1
+  json_annotation:
+  dio:
+  flutter_rating_bar:
   flutter:
     sdk: flutter
 
