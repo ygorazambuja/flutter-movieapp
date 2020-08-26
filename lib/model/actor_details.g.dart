@@ -17,7 +17,7 @@ ActorDetails _$ActorDetailsFromJson(Map<String, dynamic> json) {
         (json['also_known_as'] as List)?.map((e) => e as String)?.toList(),
     gender: json['gender'] as int,
     biography: json['biography'] as String,
-    popularity: (json['popularity'] as num)?.toDouble(),
+    popularity: json['popularity'] as num,
     placeOfBirth: json['place_of_birth'] as String,
     profilePath: json['profile_path'] as String,
     adult: json['adult'] as bool,

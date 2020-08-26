@@ -13,12 +13,12 @@ Film _$FilmFromJson(Map<String, dynamic> json) {
     voteCount: json['vote_count'] as int,
     voteAverage: (json['vote_average'] as num)?.toDouble(),
     title: json['title'] as String,
-    releaseDate: json['release_data'] as String,
+    releaseDate: json['release_date'] as String,
     originalLanguage: json['original_language'] as String,
     originalTitle: json['original_title'] as String,
     genreIds: (json['genres'] as List)
-        ?.map((e) =>
-            e == null ? null : Genres.fromJson(e as Map<String, dynamic>))
+        ?.map(
+            (e) => e == null ? null : Genre.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     backdropPath: json['backdrop_path'] as String,
     adult: json['adult'] as bool,
@@ -48,7 +48,7 @@ Map<String, dynamic> _$FilmToJson(Film instance) => <String, dynamic>{
       'vote_count': instance.voteCount,
       'vote_average': instance.voteAverage,
       'title': instance.title,
-      'release_data': instance.releaseDate,
+      'release_date': instance.releaseDate,
       'original_language': instance.originalLanguage,
       'original_title': instance.originalTitle,
       'genres': instance.genreIds,

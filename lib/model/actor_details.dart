@@ -1,9 +1,8 @@
-import 'package:bshare/provider/constants.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'actor_details.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: true, createToJson: true)
 class ActorDetails {
   String birthday;
   @JsonKey(name: 'known_for_department')
@@ -16,12 +15,12 @@ class ActorDetails {
   int gender;
   String biography;
   num popularity;
-  @JsonKey(name: "place_of_birth")
+  @JsonKey(name: 'place_of_birth')
   String placeOfBirth;
-  @JsonKey(name: "profile_path")
+  @JsonKey(name: 'profile_path')
   String profilePath;
   bool adult;
-  @JsonKey(name: "imdb_id")
+  @JsonKey(name: 'imdb_id')
   String imdbId;
   String homepage;
 
@@ -41,39 +40,7 @@ class ActorDetails {
       this.imdbId,
       this.homepage});
 
-  ActorDetails.fromJson(Map<String, dynamic> json) {
-    birthday = json['birthday'];
-    knownForDepartment = json['known_for_department'];
-    deathday = json['deathday'];
-    id = json['id'];
-    name = json['name'];
-    alsoKnownAs = json['also_known_as'].cast<String>();
-    gender = json['gender'];
-    biography = json['biography'];
-    popularity = json['popularity'];
-    placeOfBirth = json['place_of_birth'];
-    profilePath = "$IMAGE_BASE_URL${json['profile_path']}";
-    adult = json['adult'];
-    imdbId = json['imdb_id'];
-    homepage = json['homepage'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['birthday'] = this.birthday;
-    data['known_for_department'] = this.knownForDepartment;
-    data['deathday'] = this.deathday;
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['also_known_as'] = this.alsoKnownAs;
-    data['gender'] = this.gender;
-    data['biography'] = this.biography;
-    data['popularity'] = this.popularity;
-    data['place_of_birth'] = this.placeOfBirth;
-    data['profile_path'] = this.profilePath;
-    data['adult'] = this.adult;
-    data['imdb_id'] = this.imdbId;
-    data['homepage'] = this.homepage;
-    return data;
-  }
+  factory ActorDetails.fromJson(Map<String, dynamic> json) =>
+      _$ActorDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$ActorDetailsToJson(this);
 }
