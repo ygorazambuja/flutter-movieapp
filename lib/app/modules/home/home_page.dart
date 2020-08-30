@@ -1,5 +1,6 @@
 import 'package:bshare/app/modules/home/widgets/chips_lists.dart';
 import 'package:bshare/app/modules/home/widgets/favourite_actor_list.dart';
+import 'package:bshare/app/modules/home/widgets/form_search_field.dart';
 import 'package:bshare/app/modules/home/widgets/popular_list.dart';
 import 'package:bshare/app/modules/home/widgets/top_rated_list.dart';
 import 'package:bshare/app/modules/home/widgets/trending_films_list.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             CustomScrollView(
               slivers: [
                 HomeAppBar(),
+                FormSearchField(),
                 TrendingFilmList(
                   color: Colors.purple[300],
                 ),
