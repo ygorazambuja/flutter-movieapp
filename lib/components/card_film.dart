@@ -15,6 +15,9 @@ class CardFilm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (film.posterPath == null) {
+      return Container();
+    }
     return Container(
       margin: const EdgeInsets.all(4),
       width: 140,
@@ -22,11 +25,7 @@ class CardFilm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           InkWell(
-            onTap: () {
-              Modular.to.pushNamed(
-                '/filmPage/${film.id}',
-              );
-            },
+            onTap: () => Modular.to.pushNamed('/filmPage/${film.id}'),
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),

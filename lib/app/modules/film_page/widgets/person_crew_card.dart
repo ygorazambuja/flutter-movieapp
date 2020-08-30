@@ -1,15 +1,15 @@
-import 'package:bshare/model/cast.dart';
+import 'package:bshare/model/crew.dart';
 import 'package:bshare/provider/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PersonCard extends StatelessWidget {
-  const PersonCard({
+class PersonCrewCard extends StatelessWidget {
+  const PersonCrewCard({
     Key key,
-    @required this.cast,
+    @required this.crew,
   }) : super(key: key);
 
-  final Cast cast;
+  final Crew crew;
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +27,26 @@ class PersonCard extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    '$IMAGE_BASE_URL${cast.profilePath}',
-                    fit: BoxFit.cover,
-                    height: 100,
-                  ),
+                  child: crew.profilePath != null
+                      ? Image.network(
+                          '$IMAGE_BASE_URL${crew.profilePath}',
+                          fit: BoxFit.cover,
+                          height: 100,
+                        )
+                      : Image.asset(
+                          crew.gender == 2
+                              ? 'assets/images/male_placeholder.jpg'
+                              : 'assets/images/female_placeholder.jpg',
+                          fit: BoxFit.cover,
+                          height: 100,
+                        ),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 2.0),
               child: Text(
-                '${cast.name}',
+                '${crew.name}',
                 style: TextStyle(
                   fontSize: 10,
                   fontFamily: GoogleFonts.poppins().fontFamily,

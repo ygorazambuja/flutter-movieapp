@@ -1,3 +1,4 @@
+import 'package:bshare/app/app_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'film_page_controller.g.dart';
@@ -5,11 +6,7 @@ part 'film_page_controller.g.dart';
 class FilmPageController = _FilmPageControllerBase with _$FilmPageController;
 
 abstract class _FilmPageControllerBase with Store {
-  @observable
-  int value = 0;
+  _FilmPageControllerBase(this.appController);
 
-  @action
-  void increment() {
-    value++;
-  }
+  final AppController appController;
 }

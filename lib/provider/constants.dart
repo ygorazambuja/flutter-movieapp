@@ -9,8 +9,12 @@ const GENRE_SEARCH =
 const QUERY = '&query=';
 
 const POPULAR_MOVIE = 'https://api.themoviedb.org/3/movie/popular';
-const PAGE = '&page';
+const PAGE = '&page=';
 const TOP_RATED = 'https://api.themoviedb.org/3/movie/top_rated';
+const PERSON_TV_PARTICIPATIONS =
+    'https://api.themoviedb.org/3/person/83002/tv_credits';
+const PERSON_ENDPOINT = 'https://api.themoviedb.org/3/person/';
+const LANGUAGE = '&language=en-US';
 
 const GENRES = [
   {'id': 28, 'name': 'Action'},

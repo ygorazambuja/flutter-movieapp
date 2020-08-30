@@ -20,14 +20,14 @@ class GenresChipList extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: film.genreIds
               .map((e) => InkWell(
-                    onTap: () {
-                      Modular.to.pushNamed('/genrePage/${e.id}');
-                    },
+                    onTap: () => Modular.to.pushNamed('/genrePage/${e.id}'),
                     child: Card(
                       elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 10),
+                            horizontal: 16, vertical: 10),
                         child: Text(
                           e.name,
                           style: TextStyle(

@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:bshare/app/modules/genre_page/genre_page_controller.dart';
 import 'package:bshare/app/app_module.dart';
 
 void main() {

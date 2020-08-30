@@ -1,7 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+import 'genre.dart';
 import 'production_companies.dart';
 import 'production_countries.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'genre.dart';
 
 part 'film.g.dart';
 
@@ -63,4 +64,9 @@ class Film {
 
   factory Film.fromJson(Map<String, dynamic> json) => _$FilmFromJson(json);
   Map<String, dynamic> toJson() => _$FilmToJson(this);
+
+  @override
+  String toString() {
+    return 'Film(id: $id, video: $video, voteCount: $voteCount, voteAverage: $voteAverage, title: $title, releaseDate: $releaseDate, originalLanguage: $originalLanguage, originalTitle: $originalTitle, genreIds: $genreIds, backdropPath: $backdropPath, adult: $adult, overview: $overview, posterPath: $posterPath, tagline: $tagline, revenue: $revenue, runtime: $runtime, popularity: $popularity, mediaType: $mediaType, productionCompanies: $productionCompanies, productionCountries: $productionCountries)';
+  }
 }

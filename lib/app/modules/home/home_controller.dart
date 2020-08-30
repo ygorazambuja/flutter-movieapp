@@ -1,3 +1,4 @@
+import 'package:bshare/app/app_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
@@ -5,11 +6,7 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  @observable
-  int value = 0;
+  final AppController appController;
 
-  @action
-  void increment() {
-    value++;
-  }
+  _HomeControllerBase(this.appController);
 }

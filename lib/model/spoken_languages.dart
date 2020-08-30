@@ -11,4 +11,7 @@ class SpokenLanguages {
   factory SpokenLanguages.fromJson(Map<String, dynamic> json) =>
       _$SpokenLanguagesFromJson(json);
   Map<String, dynamic> toJson() => _$SpokenLanguagesToJson(this);
+
+  @override
+  String toString() => 'SpokenLanguages(iso6391: $iso6391, name: $name)';
 }

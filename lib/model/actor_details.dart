@@ -43,4 +43,9 @@ class ActorDetails {
   factory ActorDetails.fromJson(Map<String, dynamic> json) =>
       _$ActorDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$ActorDetailsToJson(this);
+
+  @override
+  String toString() {
+    return 'ActorDetails(birthday: $birthday, knownForDepartment: $knownForDepartment, deathday: $deathday, id: $id, name: $name, alsoKnownAs: $alsoKnownAs, gender: $gender, biography: $biography, popularity: $popularity, placeOfBirth: $placeOfBirth, profilePath: $profilePath, adult: $adult, imdbId: $imdbId, homepage: $homepage)';
+  }
 }

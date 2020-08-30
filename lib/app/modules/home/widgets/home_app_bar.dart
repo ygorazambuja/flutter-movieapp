@@ -1,17 +1,16 @@
+import 'package:bshare/app/modules/home/home_controller.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeAppBar extends StatefulWidget {
-  final GlobalKey<ScaffoldState> _scaffoldState;
-
-  HomeAppBar(this._scaffoldState);
-
   @override
   _HomeAppBarState createState() => _HomeAppBarState();
 }
 
-class _HomeAppBarState extends State<HomeAppBar> {
+class _HomeAppBarState extends ModularState<HomeAppBar, HomeController> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -30,14 +29,20 @@ class _HomeAppBarState extends State<HomeAppBar> {
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50))),
       leading: IconButton(
         icon: Icon(EvaIcons.menu2Outline),
-        onPressed: () {
-          widget._scaffoldState.currentState.openDrawer();
-        },
+        onPressed: () {},
       ),
       actions: [
-        CircleAvatar(
-          backgroundColor: Colors.white,
-        ),
+        Observer(
+          builder: (_) {
+            return IconButton(
+                icon: controller.appController.isDark
+                    ? Icon(EvaIcons.sun)
+                    : Icon(EvaIcons.moon),
+                onPressed: () {
+                  controller.appController.changeTheme();
+                });
+          },
+        )
       ],
     );
   }

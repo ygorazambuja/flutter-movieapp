@@ -25,4 +25,9 @@ class Crew {
 
   factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
   Map<String, dynamic> toJson() => _$CrewToJson(this);
+
+  @override
+  String toString() {
+    return 'Crew(creditId: $creditId, department: $department, gender: $gender, id: $id, job: $job, name: $name, profilePath: $profilePath)';
+  }
 }
