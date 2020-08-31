@@ -36,7 +36,7 @@ class ActorTvParticipationWidget extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Text('Participations',
+                          child: Text('Tv Participations',
                               style: TextStyle(
                                   fontFamily: GoogleFonts.poppins().fontFamily,
                                   fontSize: 16,
@@ -63,7 +63,7 @@ class ActorTvParticipationWidget extends StatelessWidget {
                     return Container();
                   }
                 } else {
-                  return Center(child: Text('Have internet connection'));
+                  return Container();
                 }
                 break;
               default:

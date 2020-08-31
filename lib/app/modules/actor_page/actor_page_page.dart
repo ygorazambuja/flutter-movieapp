@@ -43,7 +43,6 @@ class _ActorPagePageState
             break;
           case ConnectionState.done:
             if (snapshot.data is ActorDetails) {
-              print(snapshot.data);
               return CustomScrollView(
                 slivers: [
                   ActorPageAppBar(
@@ -77,13 +76,3 @@ class _ActorPagePageState
     ));
   }
 }
-
-// ActorMovieListWidget(id: widget.id, color: Colors.teal[300])
-// ActorParticipationWidget(
-//   id: widget.id.toString(),
-//   color: Colors.blueGrey[300],
-// ),
-// ActorTvParticipationWidget(
-//   id: widget.id.toString(),
-//   color: Colors.purpleAccent,
-// )

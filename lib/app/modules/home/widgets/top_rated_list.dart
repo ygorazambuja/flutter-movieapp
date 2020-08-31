@@ -40,7 +40,7 @@ class TopRatedList extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 20.0, top: 10, right: 20, bottom: 10),
-                        child: Text('Trending',
+                        child: Text('Top Rated',
                             style: TextStyle(
                                 fontFamily: GoogleFonts.poppins().fontFamily,
                                 fontSize: 20)),

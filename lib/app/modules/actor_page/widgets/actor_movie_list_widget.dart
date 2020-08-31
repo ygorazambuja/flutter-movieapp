@@ -30,6 +30,7 @@ class ActorMovieListWidget extends StatelessWidget {
             case ConnectionState.done:
               if (snapshot.data is ActorParticipation) {
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       padding:
@@ -51,6 +52,7 @@ class ActorMovieListWidget extends StatelessWidget {
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           physics: BouncingScrollPhysics(),
+                          itemCount: snapshot.data.cast.length,
                           itemBuilder: (context, index) {
                             return CardFilm(film: snapshot.data.cast[index]);
                           }),

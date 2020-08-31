@@ -110,7 +110,7 @@ class FilmPageAppBar extends StatelessWidget {
                       ),
               ),
               width: width * 0.8,
-            )
+            ),
           ],
         ));
   }

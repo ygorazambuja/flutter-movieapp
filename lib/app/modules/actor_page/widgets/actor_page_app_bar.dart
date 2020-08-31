@@ -53,7 +53,8 @@ class ActorPageAppBar extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('added in favourites !'),
+                              child: Text(
+                                  '${actorDetails.name} added in favourites !'),
                             ),
                           ],
                         ),
@@ -71,7 +72,8 @@ class ActorPageAppBar extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('${id} removed from favourites !'),
+                              child: Text(
+                                  '${actorDetails.name} removed from favourites !'),
                             ),
                           ],
                         ),
