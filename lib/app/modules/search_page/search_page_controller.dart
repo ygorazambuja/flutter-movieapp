@@ -1,6 +1,6 @@
-import 'package:bshare/app/app_controller.dart';
-import 'package:bshare/model/film.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/app/app_controller.dart';
+import 'package:yshare/model/film.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:mobx/mobx.dart';
 
 part 'search_page_controller.g.dart';

@@ -1,6 +1,6 @@
-import 'package:bshare/components/card_film.dart';
-import 'package:bshare/model/actor_participation.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/components/card_film.dart';
+import 'package:yshare/model/actor_participation.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -1,4 +1,4 @@
-# bshare
+# yShare
 
 A Flutter project recreating designs.
 

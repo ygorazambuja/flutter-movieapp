@@ -1,9 +1,10 @@
-import 'package:bshare/components/compact_card_film.dart';
+import 'package:yshare/components/compact_card_film.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'search_page_controller.dart';
 
 class SearchPagePage extends StatefulWidget {

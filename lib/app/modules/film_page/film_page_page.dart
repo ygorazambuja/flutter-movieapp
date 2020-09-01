@@ -1,14 +1,15 @@
-import 'package:bshare/app/modules/film_page/widgets/film_overview_widget.dart';
-import 'package:bshare/app/modules/film_page/widgets/film_page_app_bar.dart';
-import 'package:bshare/app/modules/film_page/widgets/film_page_crew_list.dart';
-import 'package:bshare/app/modules/film_page/widgets/film_recommendation_list.dart';
-import 'package:bshare/components/cast_horizontal_list.dart';
-import 'package:bshare/app/modules/film_page/widgets/film_info.dart';
-import 'package:bshare/app/modules/film_page/widgets/genres_chip_list.dart';
-import 'package:bshare/model/film.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/app/modules/film_page/widgets/film_info.dart';
+import 'package:yshare/app/modules/film_page/widgets/film_overview_widget.dart';
+import 'package:yshare/app/modules/film_page/widgets/film_page_app_bar.dart';
+import 'package:yshare/app/modules/film_page/widgets/film_page_crew_list.dart';
+import 'package:yshare/app/modules/film_page/widgets/film_recommendation_list.dart';
+import 'package:yshare/app/modules/film_page/widgets/genres_chip_list.dart';
+import 'package:yshare/components/cast_horizontal_list.dart';
+import 'package:yshare/model/film.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'film_page_controller.dart';
 
 class FilmPagePage extends StatefulWidget {

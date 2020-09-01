@@ -1,6 +1,6 @@
-import 'package:bshare/app/modules/actor_page/widgets/card_tv_widget.dart';
-import 'package:bshare/model/tv_participation.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/app/modules/actor_page/widgets/card_tv_widget.dart';
+import 'package:yshare/model/tv_participation.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

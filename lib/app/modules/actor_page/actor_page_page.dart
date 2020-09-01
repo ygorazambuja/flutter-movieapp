@@ -1,10 +1,10 @@
-import 'package:bshare/app/modules/actor_page/widgets/actor_info_widget.dart';
-import 'package:bshare/app/modules/actor_page/widgets/actor_movie_list_widget.dart';
-import 'package:bshare/app/modules/actor_page/widgets/actor_page_app_bar.dart';
-import 'package:bshare/app/modules/actor_page/widgets/actor_participation_widget.dart';
-import 'package:bshare/app/modules/actor_page/widgets/actor_tv_participation_widget.dart';
-import 'package:bshare/model/actor_details.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/app/modules/actor_page/widgets/actor_info_widget.dart';
+import 'package:yshare/app/modules/actor_page/widgets/actor_movie_list_widget.dart';
+import 'package:yshare/app/modules/actor_page/widgets/actor_page_app_bar.dart';
+import 'package:yshare/app/modules/actor_page/widgets/actor_participation_widget.dart';
+import 'package:yshare/app/modules/actor_page/widgets/actor_tv_participation_widget.dart';
+import 'package:yshare/model/actor_details.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'actor_page_controller.dart';

@@ -1,4 +1,4 @@
-import 'package:bshare/model/actor_details.dart';
+import 'package:yshare/model/actor_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

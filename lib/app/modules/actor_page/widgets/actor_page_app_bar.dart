@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:bshare/app/modules/actor_page/actor_page_controller.dart';
-import 'package:bshare/model/actor_details.dart';
-import 'package:bshare/provider/constants.dart';
+import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
+import 'package:yshare/model/actor_details.dart';
+import 'package:yshare/provider/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

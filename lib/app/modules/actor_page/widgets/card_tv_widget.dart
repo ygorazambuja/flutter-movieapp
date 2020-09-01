@@ -1,6 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:bshare/model/tv_participation.dart';
-import 'package:bshare/provider/constants.dart';
+import 'package:yshare/model/tv_participation.dart';
+import 'package:yshare/provider/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

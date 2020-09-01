@@ -1,5 +1,6 @@
-import 'package:bshare/model/film.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:yshare/model/film.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,7 +45,8 @@ class PopularList extends StatelessWidget {
                             ),
                             InkWell(
                               splashColor: Colors.pink.withOpacity(0.5),
-                              onTap: () {},
+                              onTap: () =>
+                                  Modular.to.pushNamed('/popularFilms'),
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 20.0, top: 10, right: 20, bottom: 10),

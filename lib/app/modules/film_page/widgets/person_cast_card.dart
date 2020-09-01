@@ -1,5 +1,5 @@
-import 'package:bshare/model/cast.dart';
-import 'package:bshare/provider/constants.dart';
+import 'package:yshare/model/cast.dart';
+import 'package:yshare/provider/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';

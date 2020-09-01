@@ -1,6 +1,6 @@
-import 'package:bshare/app/modules/home/widgets/person_favourite_card.dart';
-import 'package:bshare/model/actor_details.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/app/modules/home/widgets/person_favourite_card.dart';
+import 'package:yshare/model/actor_details.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

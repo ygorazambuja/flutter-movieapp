@@ -1,10 +1,10 @@
-import 'package:bshare/model/actor_details.dart';
-import 'package:bshare/model/actor_participation.dart';
-import 'package:bshare/model/film.dart';
-import 'package:bshare/model/film_credit.dart';
-import 'package:bshare/model/tv_participation.dart';
-import 'package:bshare/provider/constants.dart';
 import 'package:dio/dio.dart';
+import 'package:yshare/model/actor_details.dart';
+import 'package:yshare/model/actor_participation.dart';
+import 'package:yshare/model/film.dart';
+import 'package:yshare/model/film_credit.dart';
+import 'package:yshare/model/tv_participation.dart';
+import 'package:yshare/provider/constants.dart';
 
 class Api {
   final Dio _client = Dio();
@@ -15,8 +15,8 @@ class Api {
     return Film.fromJson(response.data);
   }
 
-  Future<List<Film>> getTrendingFilms() async {
-    final _endpoint = '$TRENDING_MOVIE$API_KEY';
+  Future<List<Film>> getTrendingFilms([page = 1]) async {
+    final _endpoint = '$TRENDING_MOVIE$API_KEY$PAGE$page';
     final response = await _client.request(_endpoint);
     final films = <Film>[];
 
@@ -93,7 +93,7 @@ class Api {
   }
 
   Future<List<Film>> getPopular([page = 1]) async {
-    final _endpoint = '$POPULAR_MOVIE$API_KEY$PAGE';
+    final _endpoint = '$POPULAR_MOVIE$API_KEY$PAGE$page';
     final response = await _client.request(_endpoint);
     final films = <Film>[];
 
@@ -105,7 +105,7 @@ class Api {
   }
 
   Future<List<Film>> getTopRated([page = 1]) async {
-    final _endpoint = '$TOP_RATED$API_KEY$PAGE';
+    final _endpoint = '$TOP_RATED$API_KEY$PAGE$page';
     final response = await _client.request(_endpoint);
     final films = <Film>[];
 

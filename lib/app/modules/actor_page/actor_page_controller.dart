@@ -1,4 +1,4 @@
-import 'package:bshare/app/app_controller.dart';
+import 'package:yshare/app/app_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'actor_page_controller.g.dart';

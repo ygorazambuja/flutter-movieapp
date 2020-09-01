@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../provider/constants.dart';
 
 class ChipList extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:bshare/app/modules/film_page/widgets/person_crew_card.dart';
-import 'package:bshare/model/film_credit.dart';
-import 'package:bshare/provider/api.dart';
+import 'package:yshare/app/modules/film_page/widgets/person_crew_card.dart';
+import 'package:yshare/model/film_credit.dart';
+import 'package:yshare/provider/api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
