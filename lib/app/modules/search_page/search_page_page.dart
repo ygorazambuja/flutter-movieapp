@@ -1,9 +1,12 @@
-import 'package:yshare/components/compact_card_film.dart';
+import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yshare/app/modules/search_page/widgets/compact_tv_film.dart';
+import 'package:yshare/model/film.dart';
+import 'package:yshare/model/tv.dart';
 
 import 'search_page_controller.dart';
 
@@ -28,7 +31,7 @@ class _SearchPagePageState
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
       controller.setActualPage(controller.actualPage + 1);
-      controller.fetchFilms();
+      controller.fetchMultiSearch();
     }
   }
 
@@ -43,7 +46,7 @@ class _SearchPagePageState
   void initState() {
     super.initState();
     controller.setSearchName(widget.name);
-    controller.fetchFilms();
+    controller.fetchMultiSearch();
     _scrollController.addListener(_scrollListener);
   }
 
@@ -97,7 +100,12 @@ class _SearchPagePageState
                 itemCount: controller.films.length,
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) =>
-                    CompactCardFilm(film: controller.films[index]),
+                    controller.films[index]['media_type'] == 'tv'
+                        ? CompactTvFilm(
+                            tv: Tv.fromJson(controller.films[index]),
+                          )
+                        : CompactCardFilm(
+                            film: Film.fromJson(controller.films[index])),
               ),
             ),
           ],

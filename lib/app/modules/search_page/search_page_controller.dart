@@ -1,5 +1,4 @@
 import 'package:yshare/app/app_controller.dart';
-import 'package:yshare/model/film.dart';
 import 'package:yshare/provider/api.dart';
 import 'package:mobx/mobx.dart';
 
@@ -17,7 +16,8 @@ abstract class _SearchPageControllerBase with Store {
   String searchName;
 
   @observable
-  ObservableList<Film> films = ObservableList<Film>();
+  ObservableList<Map<String, dynamic>> films =
+      ObservableList<Map<String, dynamic>>();
 
   final Api api = Api();
 
@@ -31,8 +31,8 @@ abstract class _SearchPageControllerBase with Store {
   void setActualPage(actualPage) => this.actualPage = actualPage;
 
   @action
-  Future<void> fetchFilms() async {
-    var response = await api.searchFilm(searchName, actualPage);
+  Future<void> fetchMultiSearch() async {
+    var response = await api.multiSearch(searchName, actualPage);
     for (var film in response) {
       films.add(film);
     }

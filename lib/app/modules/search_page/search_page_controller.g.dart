@@ -27,13 +27,13 @@ mixin _$SearchPageController on _SearchPageControllerBase, Store {
   final _$filmsAtom = Atom(name: '_SearchPageControllerBase.films');
 
   @override
-  ObservableList<Film> get films {
+  ObservableList<Map<String, dynamic>> get films {
     _$filmsAtom.reportRead();
     return super.films;
   }
 
   @override
-  set films(ObservableList<Film> value) {
+  set films(ObservableList<Map<String, dynamic>> value) {
     _$filmsAtom.reportWrite(value, super.films, () {
       super.films = value;
     });
@@ -54,12 +54,12 @@ mixin _$SearchPageController on _SearchPageControllerBase, Store {
     });
   }
 
-  final _$fetchFilmsAsyncAction =
-      AsyncAction('_SearchPageControllerBase.fetchFilms');
+  final _$fetchMultiSearchAsyncAction =
+      AsyncAction('_SearchPageControllerBase.fetchMultiSearch');
 
   @override
-  Future<void> fetchFilms() {
-    return _$fetchFilmsAsyncAction.run(() => super.fetchFilms());
+  Future<void> fetchMultiSearch() {
+    return _$fetchMultiSearchAsyncAction.run(() => super.fetchMultiSearch());
   }
 
   final _$_SearchPageControllerBaseActionController =

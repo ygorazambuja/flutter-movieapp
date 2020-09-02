@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/home/widgets/chips_lists.dart';
 import 'package:yshare/app/modules/home/widgets/favourite_actor_list.dart';
 import 'package:yshare/app/modules/home/widgets/favourite_film_list.dart';
@@ -55,6 +56,28 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(20),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      Text(
+                        'powered by: ',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: GoogleFonts.aBeeZee().fontFamily),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            'assets/images/the_movie_db.png',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],

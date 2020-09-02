@@ -19,9 +19,7 @@ class FilmPageCrewList extends StatelessWidget {
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
-                return Center(
-                  child: Text('do you have internet access ?'),
-                );
+                return Container();
                 break;
               case ConnectionState.active:
               case ConnectionState.waiting:
@@ -44,29 +42,26 @@ class FilmPageCrewList extends StatelessWidget {
                                 fontSize: 18)),
                       ),
                       Container(
-                        height: 140,
+                        height: 170,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data.crew.length,
                           itemBuilder: (context, index) {
                             return PersonCrewCard(
-                                crew: snapshot.data.crew[index]);
+                              crew: snapshot.data.crew[index],
+                            );
                           },
                         ),
                       ),
                     ],
                   );
                 } else {
-                  return Center(
-                    child: Text('something wrong happenmed'),
-                  );
+                  return Container();
                 }
                 break;
               default:
-                return Center(
-                  child: Text('something wrong happenmed'),
-                );
+                return Container();
             }
           }),
     );

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/top_rated_page/top_rated_page_page.dart';
 import 'package:yshare/app/modules/trending_page/trending_page_page.dart';
+import 'package:yshare/app/modules/tv_page/tv_page_page.dart';
 
 import 'app_controller.dart';
 import 'modules/actor_page/actor_page_controller.dart';
@@ -18,10 +19,12 @@ import 'modules/popular_page/popular_page_controller.dart';
 import 'modules/search_page/search_page_controller.dart';
 import 'modules/top_rated_page/top_rated_page_controller.dart';
 import 'modules/trending_page/trending_page_controller.dart';
+import 'modules/tv_page/tv_page_controller.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => TvPageController(i.get<AppController>())),
         Bind((i) => TopRatedPageController(i.get<AppController>())),
         Bind((i) => PopularPageController(i.get<AppController>())),
         Bind((i) => TrendingPageController(i.get<AppController>())),
@@ -58,7 +61,9 @@ class AppModule extends MainModule {
         ),
         ModularRouter(
           '/searchFilmPage/:name',
-          child: (context, args) => SearchPagePage(name: args.params['name']),
+          child: (context, args) => SearchPagePage(
+            name: args.params['name'],
+          ),
         ),
         ModularRouter(
           '/trendingFilms',
@@ -72,6 +77,12 @@ class AppModule extends MainModule {
           '/topRatedFilms',
           child: (context, args) => TopRatedPagePage(),
         ),
+        ModularRouter(
+          '/tvPage/:id',
+          child: (context, args) => TvPagePage(
+            id: args.params['id'],
+          ),
+        )
       ];
 
   @override

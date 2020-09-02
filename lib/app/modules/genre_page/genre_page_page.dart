@@ -1,4 +1,4 @@
-import 'package:yshare/components/compact_card_film.dart';
+import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
 import 'package:yshare/provider/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';

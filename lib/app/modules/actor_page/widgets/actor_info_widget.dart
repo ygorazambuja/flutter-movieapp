@@ -70,27 +70,29 @@ class ActorInfoWidget extends StatelessWidget {
                       })
                 ],
               ),
-              Column(children: [
-                Text(
-                  'birthday',
-                  style: TextStyle(
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .color
-                          .withOpacity(0.6),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w200,
-                      fontFamily: GoogleFonts.poppins().fontFamily),
-                ),
-                Text(
-                  DateFormat(DateFormat.ABBR_MONTH_DAY)
-                      .format(DateTime.parse(actorDetails.birthday)),
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: GoogleFonts.poppins().fontFamily),
-                )
-              ]),
+              actorDetails.birthday != null
+                  ? Column(children: [
+                      Text(
+                        'birthday',
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .color
+                                .withOpacity(0.6),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w200,
+                            fontFamily: GoogleFonts.poppins().fontFamily),
+                      ),
+                      Text(
+                        DateFormat(DateFormat.ABBR_MONTH_DAY)
+                            .format(DateTime.parse(actorDetails.birthday)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts.poppins().fontFamily),
+                      )
+                    ])
+                  : Container(),
               Column(
                 children: [
                   Text(

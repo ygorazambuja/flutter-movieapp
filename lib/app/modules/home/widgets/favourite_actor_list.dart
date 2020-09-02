@@ -23,7 +23,7 @@ class FavouriteActorList extends StatelessWidget {
           actorsId.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text('Favourites Actors',
+                  child: Text('Favourites Peoples',
                       style: TextStyle(
                           fontFamily: GoogleFonts.poppins().fontFamily,
                           fontSize: 20)),

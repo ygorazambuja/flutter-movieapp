@@ -3,6 +3,7 @@ import 'package:yshare/model/actor_details.dart';
 import 'package:yshare/model/actor_participation.dart';
 import 'package:yshare/model/film.dart';
 import 'package:yshare/model/film_credit.dart';
+import 'package:yshare/model/tv.dart';
 import 'package:yshare/model/tv_participation.dart';
 import 'package:yshare/provider/constants.dart';
 
@@ -65,14 +66,14 @@ class Api {
 
   Future<ActorDetails> getActorDetails(String actorId) async {
     final _endpoint =
-        'https://api.themoviedb.org/3/person/$actorId?api_key=ab319f50a3792c49e23a3336df9f0d80&language=en-US';
+        'https://api.themoviedb.org/3/person/$actorId$API_KEY&language=en-US';
     final response = await _client.request(_endpoint);
     return ActorDetails.fromJson(response.data);
   }
 
   Future<ActorParticipation> getActorParticipation(String actorId) async {
     final _endpoint =
-        'https://api.themoviedb.org/3/person/$actorId/movie_credits?api_key=ab319f50a3792c49e23a3336df9f0d80&language=en-US';
+        'https://api.themoviedb.org/3/person/$actorId/movie_credits$API_KEY&language=en-US';
 
     final response = await _client.request(_endpoint);
 
@@ -127,5 +128,24 @@ class Api {
       tvParticipations.add(tv);
     }
     return tvParticipations;
+  }
+
+  Future<List<Map<String, dynamic>>> multiSearch(query, [page = 1]) async {
+    final _endpoint =
+        'https://api.themoviedb.org/3/search/multi?api_key=ab319f50a3792c49e23a3336df9f0d80&language=en-US$QUERY$query$PAGE$page';
+    final response = await _client.request(_endpoint);
+
+    var resultSearch = <Map<String, dynamic>>[];
+
+    for (Map<String, dynamic> json in response.data['results']) {
+      if (json['media_type'] == 'tv') {
+        resultSearch.add(Tv.fromJson(json).toJson());
+      }
+
+      if (json['media_type'] == 'movie') {
+        resultSearch.add(Film.fromJson(json).toJson());
+      }
+    }
+    return resultSearch;
   }
 }

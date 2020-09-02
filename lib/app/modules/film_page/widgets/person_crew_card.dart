@@ -1,13 +1,11 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/model/crew.dart';
 import 'package:yshare/provider/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PersonCrewCard extends StatelessWidget {
-  const PersonCrewCard({
-    Key key,
-    @required this.crew,
-  }) : super(key: key);
+  const PersonCrewCard({Key key, this.crew}) : super(key: key);
 
   final Crew crew;
 
@@ -19,6 +17,7 @@ class PersonCrewCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             InkWell(
+              onTap: () => Modular.to.pushNamed('/actorPage/${crew.id}'),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
@@ -44,7 +43,7 @@ class PersonCrewCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 2.0),
+              padding: const EdgeInsets.only(top: 1.0),
               child: Text(
                 '${crew.name}',
                 style: TextStyle(
@@ -56,6 +55,17 @@ class PersonCrewCard extends StatelessWidget {
                 maxLines: 2,
                 softWrap: true,
               ),
+            ),
+            Text(
+              '${crew.department}',
+              style: TextStyle(
+                fontSize: 10,
+                fontFamily: GoogleFonts.poppins().fontFamily,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.fade,
+              maxLines: 2,
+              softWrap: true,
             ),
           ],
         ));
