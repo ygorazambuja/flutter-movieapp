@@ -8,7 +8,6 @@ import 'package:yshare/app/modules/home/widgets/popular_list.dart';
 import 'package:yshare/app/modules/home/widgets/top_rated_list.dart';
 import 'package:yshare/app/modules/home/widgets/trending_films_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'home_controller.dart';
@@ -16,7 +15,10 @@ import 'home_controller.dart';
 class HomePage extends StatefulWidget {
   final String title;
 
-  const HomePage({Key key, this.title = 'Home'}) : super(key: key);
+  const HomePage({
+    Key key,
+    this.title = 'Home',
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -28,29 +30,32 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
-      body: Observer(
-        builder: (_) {
-          return Stack(children: [
+        drawer: Drawer(),
+        body: Stack(
+          children: [
             CustomScrollView(
               slivers: [
                 HomeAppBar(),
                 FormSearchField(),
                 TrendingFilmList(
+                  repository: controller.filmRepository,
                   color: Colors.purple[300],
                 ),
                 FavouriteFilmList(
-                    color: Colors.green[800],
-                    filmsId: controller.appController.favouriteFilms),
+                  color: Colors.green[800],
+                  controller: controller,
+                ),
                 FavouriteActorList(
-                  actorsId: controller.appController.subscribedActors,
+                  controller: controller,
                   color: Colors.blue[400],
                 ),
                 ChipList(),
                 PopularList(
+                  controller: controller,
                   color: Colors.orange,
                 ),
                 TopRatedList(
+                  controller: controller,
                   color: Colors.pink[400],
                 ),
                 SliverToBoxAdapter(
@@ -83,9 +88,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               ],
               physics: BouncingScrollPhysics(),
             ),
-          ]);
-        },
-      ),
-    );
+          ],
+        ));
   }
 }

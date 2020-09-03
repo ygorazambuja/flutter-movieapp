@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
+import 'package:yshare/domain/usecases/film/get_trending_films_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,13 +9,18 @@ import 'film_horizontal_list.dart';
 
 class TrendingFilmList extends StatelessWidget {
   final Color color;
-  const TrendingFilmList({Key key, @required this.color}) : super(key: key);
+  final FilmAbstractRepository repository;
+  const TrendingFilmList({
+    Key key,
+    @required this.repository,
+    @required this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
         child: FutureBuilder<List<Film>>(
-      future: Api().getTrendingFilms(),
+      future: GetTrendingFilmsUsecase(page: 1, repository: repository)(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:

@@ -1,4 +1,4 @@
-import 'package:yshare/model/film.dart';
+import 'package:yshare/domain/entities/film.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'actor_participation.g.dart';

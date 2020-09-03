@@ -1,7 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:yshare/app/app_controller.dart';
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
+import 'package:yshare/domain/usecases/film/get_trending_films_usecase.dart';
 
 part 'trending_page_controller.g.dart';
 
@@ -10,13 +11,12 @@ class TrendingPageController = _TrendingPageControllerBase
 
 abstract class _TrendingPageControllerBase with Store {
   final AppController appController;
+  final FilmAbstractRepository repository;
 
-  _TrendingPageControllerBase(this.appController);
+  _TrendingPageControllerBase(this.appController, this.repository);
 
   @observable
   ObservableList<Film> films = ObservableList<Film>();
-
-  final Api api = Api();
 
   @observable
   int actualPage = 1;
@@ -26,7 +26,8 @@ abstract class _TrendingPageControllerBase with Store {
 
   @action
   Future<void> fetchTredingFilms() async {
-    var response = await api.getTrendingFilms(actualPage);
+    var response = await GetTrendingFilmsUsecase(
+        page: actualPage, repository: repository)();
     for (var film in response) {
       films.add(film);
     }

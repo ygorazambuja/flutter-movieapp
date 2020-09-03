@@ -1,17 +1,19 @@
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:yshare/app/modules/home/home_controller.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/usecases/film/get_film_by_id_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../components/card_film.dart';
 
 class FavouriteFilmList extends StatelessWidget {
-  final List<int> filmsId;
+  final HomeController controller;
   final Color color;
   const FavouriteFilmList({
     Key key,
-    @required this.filmsId,
     @required this.color,
+    @required this.controller,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class FavouriteFilmList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          filmsId.isNotEmpty
+          controller.appController.favouriteFilms.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text('Favourites Films',
@@ -29,33 +31,40 @@ class FavouriteFilmList extends StatelessWidget {
                       )),
                 )
               : Container(),
-          Container(
-            height: filmsId.isEmpty ? 0 : 250,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                color: color),
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: filmsId.length,
-              itemBuilder: (context, index) {
-                var id = filmsId[index];
-                return FutureBuilder<Film>(
-                    future: Api().getFilmById(id.toString()),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        if (snapshot.data.posterPath == null) {
-                          return Container();
-                        } else {
-                          return CardFilm(film: snapshot.data);
-                        }
-                      } else {
-                        return CircularProgressIndicator();
-                      }
-                    });
-              },
-            ),
-          )
+          Observer(
+            builder: (_) {
+              return Container(
+                height:
+                    controller.appController.favouriteFilms.isEmpty ? 0 : 250,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    color: color),
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.appController.favouriteFilms.length,
+                  itemBuilder: (context, index) {
+                    var id = controller.appController.favouriteFilms[index];
+                    return FutureBuilder<Film>(
+                        future: GetFilmByIdUsecase(
+                            id: id.toString(),
+                            repository: controller.filmRepository)(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            if (snapshot.data.posterPath == null) {
+                              return Container();
+                            } else {
+                              return CardFilm(film: snapshot.data);
+                            }
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        });
+                  },
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

@@ -2,8 +2,8 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yshare/model/tv.dart';
-import 'package:yshare/provider/constants.dart';
+import 'package:yshare/domain/entities/tv.dart';
+import 'package:yshare/shared/constants.dart';
 
 class CompactTvFilm extends StatelessWidget {
   final Tv tv;

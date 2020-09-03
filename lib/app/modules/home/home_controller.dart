@@ -1,5 +1,7 @@
 import 'package:yshare/app/app_controller.dart';
 import 'package:mobx/mobx.dart';
+import 'package:yshare/domain/repository/actor_details/actor_details_abstract_repository.dart';
+import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
 
 part 'home_controller.g.dart';
 
@@ -8,5 +10,12 @@ class HomeController = _HomeControllerBase with _$HomeController;
 abstract class _HomeControllerBase with Store {
   final AppController appController;
 
-  _HomeControllerBase(this.appController);
+  final FilmAbstractRepository filmRepository;
+  final ActorDetailsAbstractRepository actorDetailsRepository;
+
+  _HomeControllerBase({
+    this.actorDetailsRepository,
+    this.appController,
+    this.filmRepository,
+  });
 }

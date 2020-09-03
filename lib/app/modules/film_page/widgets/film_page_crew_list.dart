@@ -1,21 +1,27 @@
 import 'package:yshare/app/modules/film_page/widgets/person_crew_card.dart';
-import 'package:yshare/model/film_credit.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film_credit.dart';
+import 'package:yshare/domain/repository/film_credit/film_credit_abstract_repository.dart';
+import 'package:yshare/domain/usecases/film_credits/get_film_credits_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilmPageCrewList extends StatelessWidget {
+  final FilmCreditAbstractRepository repository;
   final String id;
   const FilmPageCrewList({
     Key key,
     @required this.id,
+    @required this.repository,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: FutureBuilder<FilmCredit>(
-          future: Api().getFilmCredits(id),
+          future: GetFilmCreditsUsecase(
+            filmId: id,
+            repository: repository,
+          )(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

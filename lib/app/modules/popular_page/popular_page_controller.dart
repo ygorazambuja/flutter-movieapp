@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:yshare/app/app_controller.dart';
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
+import 'package:yshare/domain/usecases/film/get_popular_film_usecase.dart';
 
 part 'popular_page_controller.g.dart';
 
@@ -10,12 +12,12 @@ class PopularPageController = _PopularPageControllerBase
 
 abstract class _PopularPageControllerBase with Store {
   final AppController appController;
-  _PopularPageControllerBase(this.appController);
+  _PopularPageControllerBase(
+      {@required this.appController, @required this.repository});
+  final FilmAbstractRepository repository;
 
   @observable
   ObservableList<Film> films = ObservableList<Film>();
-
-  final Api api = Api();
 
   @observable
   int actualPage = 1;
@@ -25,7 +27,8 @@ abstract class _PopularPageControllerBase with Store {
 
   @action
   Future<void> fetchPopularFilms() async {
-    var response = await api.getPopular(actualPage);
+    var response =
+        await GetPopularFilmUsecase(page: actualPage, repository: repository)();
     for (var film in response) {
       films.add(film);
     }

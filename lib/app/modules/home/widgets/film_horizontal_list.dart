@@ -1,5 +1,5 @@
 import 'package:yshare/components/card_film.dart';
-import 'package:yshare/model/film.dart';
+import 'package:yshare/domain/entities/film.dart';
 import 'package:flutter/material.dart';
 
 class FilmHorizontalList extends StatelessWidget {

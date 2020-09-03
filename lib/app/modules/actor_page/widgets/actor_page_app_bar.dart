@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
-import 'package:yshare/model/actor_details.dart';
-import 'package:yshare/provider/constants.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
+import 'package:yshare/shared/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -103,10 +103,12 @@ class ActorPageAppBar extends StatelessWidget {
           Container(
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
-              child: Image.network(
-                IMAGE_BASE_URL + actorDetails.profilePath,
-                fit: BoxFit.fitWidth,
-              ),
+              child: actorDetails.profilePath != null
+                  ? Image.network(
+                      IMAGE_BASE_URL + actorDetails.profilePath,
+                      fit: BoxFit.fitWidth,
+                    )
+                  : Container(),
             ),
             width: width * 0.8,
           )

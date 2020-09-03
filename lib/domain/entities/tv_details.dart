@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:yshare/model/next_episode_to_air.dart';
-import 'package:yshare/model/production_companies.dart';
-import 'package:yshare/model/season.dart';
+import 'package:yshare/domain/entities/next_episode_to_air.dart';
+import 'package:yshare/domain/entities/production_companies.dart';
+import 'package:yshare/domain/entities/season.dart';
 
 import 'created_by.dart';
 import 'genre.dart';

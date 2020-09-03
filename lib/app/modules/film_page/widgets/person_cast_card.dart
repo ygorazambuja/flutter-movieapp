@@ -1,5 +1,5 @@
-import 'package:yshare/model/cast.dart';
-import 'package:yshare/provider/constants.dart';
+import 'package:yshare/domain/entities/cast.dart';
+import 'package:yshare/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +15,7 @@ class PersonCastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 140,
+      width: 150,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -53,6 +53,22 @@ class PersonCastCard extends StatelessWidget {
               softWrap: true,
             ),
           ),
+          cast.character != null
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 2.0),
+                  child: Text(
+                    '${cast.character}',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.fade,
+                    maxLines: 2,
+                    softWrap: true,
+                  ),
+                )
+              : Container()
         ],
       ),
     );

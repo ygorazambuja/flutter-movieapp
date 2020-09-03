@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:yshare/app/app_controller.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
+import 'package:yshare/domain/usecases/film/multi_search_usecase.dart';
 import 'package:mobx/mobx.dart';
 
 part 'search_page_controller.g.dart';
@@ -9,8 +11,10 @@ class SearchPageController = _SearchPageControllerBase
 
 abstract class _SearchPageControllerBase with Store {
   final AppController appController;
+  final FilmAbstractRepository repository;
 
-  _SearchPageControllerBase(this.appController);
+  _SearchPageControllerBase(
+      {@required this.appController, @required this.repository});
 
   @observable
   String searchName;
@@ -18,8 +22,6 @@ abstract class _SearchPageControllerBase with Store {
   @observable
   ObservableList<Map<String, dynamic>> films =
       ObservableList<Map<String, dynamic>>();
-
-  final Api api = Api();
 
   @observable
   int actualPage = 1;
@@ -32,7 +34,8 @@ abstract class _SearchPageControllerBase with Store {
 
   @action
   Future<void> fetchMultiSearch() async {
-    var response = await api.multiSearch(searchName, actualPage);
+    var response = await MultiSearchUsecase(
+        page: actualPage, repository: repository, searchParam: searchName)();
     for (var film in response) {
       films.add(film);
     }

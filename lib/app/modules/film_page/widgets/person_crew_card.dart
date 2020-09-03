@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:yshare/model/crew.dart';
-import 'package:yshare/provider/constants.dart';
+import 'package:yshare/domain/entities/crew.dart';
+import 'package:yshare/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

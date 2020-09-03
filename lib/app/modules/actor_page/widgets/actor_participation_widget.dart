@@ -1,6 +1,7 @@
+import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
 import 'package:yshare/components/card_film.dart';
-import 'package:yshare/model/actor_participation.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/actor_participation.dart';
+import 'package:yshare/domain/usecases/actor_participation/get_actor_participation_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,17 +9,21 @@ class ActorParticipationWidget extends StatelessWidget {
   final String id;
   final Color color;
 
+  final ActorPageController controller;
   const ActorParticipationWidget({
     Key key,
     @required this.id,
     @required this.color,
+    @required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: FutureBuilder<ActorParticipation>(
-          future: Api().getActorParticipation(id),
+          future: GetActorParticipationUsecase(
+              actorId: id,
+              repository: controller.actorParticipationRepository)(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

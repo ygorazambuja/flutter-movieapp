@@ -1,6 +1,7 @@
-import 'package:yshare/model/actor_details.dart';
-import 'package:yshare/provider/api.dart';
-import 'package:yshare/provider/constants.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
+import 'package:yshare/domain/repository/actor_details/actor_details_abstract_repository.dart';
+import 'package:yshare/domain/usecases/actor_details/get_actor_details_usecase.dart';
+import 'package:yshare/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,8 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 class CardFilmList extends StatelessWidget {
   final List<int> actors;
   final Color color;
+  final ActorDetailsAbstractRepository repository;
 
-  const CardFilmList({Key key, @required this.actors, this.color})
+  const CardFilmList(
+      {Key key,
+      @required this.actors,
+      @required this.color,
+      @required this.repository})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,8 @@ class CardFilmList extends StatelessWidget {
       itemCount: actors.length,
       itemBuilder: (context, index) {
         return FutureBuilder<ActorDetails>(
-          future: Api().getActorDetails(actors[index].toString()),
+          future: GetActorDetailsUsecase(
+              actorId: actors[index].toString(), repository: repository)(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

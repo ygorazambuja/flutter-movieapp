@@ -1,5 +1,6 @@
 import 'package:yshare/app/app_widget.dart';
 import 'package:yshare/app/modules/actor_page/actor_page_page.dart';
+import 'package:yshare/app/modules/film_page/film_page_controller.dart';
 import 'package:yshare/app/modules/film_page/film_page_page.dart';
 import 'package:yshare/app/modules/genre_page/genre_page_page.dart';
 import 'package:yshare/app/modules/home/home_module.dart';
@@ -10,10 +11,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/top_rated_page/top_rated_page_page.dart';
 import 'package:yshare/app/modules/trending_page/trending_page_page.dart';
 import 'package:yshare/app/modules/tv_page/tv_page_page.dart';
+import 'package:yshare/infra/repository/actor_details/actor_details_implementation_repository.dart';
+import 'package:yshare/infra/repository/actor_participation/actor_participation_implementation_repository.dart';
+import 'package:yshare/infra/repository/film/film_implementation_repository.dart';
+import 'package:yshare/infra/repository/film_credit/film_credit_implementation_repository.dart';
+import 'package:yshare/infra/repository/tv_participation/tv_participation_implementation_repository.dart';
 
 import 'app_controller.dart';
 import 'modules/actor_page/actor_page_controller.dart';
-import 'modules/film_page/film_page_controller.dart';
 import 'modules/genre_page/genre_page_controller.dart';
 import 'modules/popular_page/popular_page_controller.dart';
 import 'modules/search_page/search_page_controller.dart';
@@ -24,14 +29,49 @@ import 'modules/tv_page/tv_page_controller.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => TvPageController(i.get<AppController>())),
-        Bind((i) => TopRatedPageController(i.get<AppController>())),
-        Bind((i) => PopularPageController(i.get<AppController>())),
-        Bind((i) => TrendingPageController(i.get<AppController>())),
-        Bind((i) => SearchPageController(i.get<AppController>())),
-        Bind((i) => ActorPageController(i.get<AppController>())),
-        Bind((i) => GenrePageController(i.get<AppController>())),
-        Bind((i) => FilmPageController(i.get<AppController>())),
+        Bind(
+          (i) => FilmPageController(
+            appController: i.get<AppController>(),
+            repository: FilmImplementationRepository(),
+            filmCreditRepository: FilmCreditImplementationRepository(),
+          ),
+        ),
+        Bind(
+          (i) => TvPageController(appController: i.get<AppController>()),
+        ),
+        Bind(
+          (i) => TopRatedPageController(
+              appController: i.get<AppController>(),
+              repository: FilmImplementationRepository()),
+        ),
+        Bind(
+          (i) => PopularPageController(
+              appController: i.get<AppController>(),
+              repository: FilmImplementationRepository()),
+        ),
+        Bind(
+          (i) => TrendingPageController(
+              i.get<AppController>(), FilmImplementationRepository()),
+        ),
+        Bind(
+          (i) => SearchPageController(
+              appController: i.get<AppController>(),
+              repository: FilmImplementationRepository()),
+        ),
+        Bind(
+          (i) => ActorPageController(
+              appController: i.get<AppController>(),
+              actorDetailsRepository: ActorDetailsImplementationRepository(),
+              actorParticipationRepository:
+                  ActorParticipationImplementationRepository(),
+              tvRepository: TvParticipationImplementationRepository()),
+        ),
+        Bind(
+          (i) => GenrePageController(
+            appController: i.get<AppController>(),
+            repository: FilmImplementationRepository(),
+          ),
+        ),
         Bind((i) => AppController()),
       ];
 
@@ -79,9 +119,7 @@ class AppModule extends MainModule {
         ),
         ModularRouter(
           '/tvPage/:id',
-          child: (context, args) => TvPagePage(
-            id: args.params['id'],
-          ),
+          child: (context, args) => TvPagePage(id: args.params['id']),
         )
       ];
 

@@ -30,7 +30,10 @@ TvDetails _$TvDetailsFromJson(Map<String, dynamic> json) {
         : LastEpisodeToAir.fromJson(
             json['last_episode_to_air'] as Map<String, dynamic>),
     name: json['name'] as String,
-    nextEpisodeToAir: json['next_episode_to_air'],
+    nextEpisodeToAir: json['next_episode_to_air'] == null
+        ? null
+        : NextEpisodeToAir.fromJson(
+            json['next_episode_to_air'] as Map<String, dynamic>),
     networks: (json['networks'] as List)
         ?.map((e) =>
             e == null ? null : Network.fromJson(e as Map<String, dynamic>))

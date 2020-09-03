@@ -7,6 +7,7 @@ class TvPageController = _TvPageControllerBase with _$TvPageController;
 
 abstract class _TvPageControllerBase with Store {
   final AppController appController;
-
-  _TvPageControllerBase(this.appController);
+  _TvPageControllerBase({
+    this.appController,
+  });
 }

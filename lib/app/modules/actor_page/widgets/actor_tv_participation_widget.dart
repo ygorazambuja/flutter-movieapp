@@ -1,24 +1,28 @@
+import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
 import 'package:yshare/app/modules/actor_page/widgets/card_tv_widget.dart';
-import 'package:yshare/model/tv_participation.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/tv_participation.dart';
+import 'package:yshare/domain/usecases/tv_participation/get_person_tv_participation_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ActorTvParticipationWidget extends StatelessWidget {
   final String id;
   final Color color;
+  final ActorPageController controller;
 
   const ActorTvParticipationWidget({
     Key key,
-    this.id,
-    this.color,
+    @required this.id,
+    @required this.color,
+    @required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: FutureBuilder<List<TvParticipation>>(
-          future: Api().getPersonTvParticipations(id),
+          future: GetPersonTvParticipationUsecase(
+              personId: id, repository: controller.tvRepository)(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

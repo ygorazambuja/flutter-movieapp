@@ -21,11 +21,9 @@ class _TvPagePageState extends ModularState<TvPagePage, TvPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[Text(widget.id)],
+      body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
+        slivers: [TvPagePage(id: widget.id)],
       ),
     );
   }

@@ -1,5 +1,5 @@
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/constants.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/shared/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

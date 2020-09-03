@@ -1,17 +1,19 @@
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:yshare/app/modules/home/widgets/person_favourite_card.dart';
-import 'package:yshare/model/actor_details.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
+import 'package:yshare/domain/usecases/actor_details/get_actor_details_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../home_controller.dart';
+
 class FavouriteActorList extends StatelessWidget {
   final Color color;
-  final List<int> actorsId;
-
+  final HomeController controller;
   const FavouriteActorList({
     Key key,
     @required this.color,
-    @required this.actorsId,
+    @required this.controller,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class FavouriteActorList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          actorsId.isNotEmpty
+          controller.appController.subscribedActors.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text('Favourites Peoples',
@@ -29,33 +31,38 @@ class FavouriteActorList extends StatelessWidget {
                           fontSize: 20)),
                 )
               : Container(),
-          Container(
-            height: actorsId.isEmpty ? 0 : 250,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                color: color),
-            child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: actorsId.length,
-                itemBuilder: (context, index) {
-                  var id = actorsId[index];
-                  return FutureBuilder<ActorDetails>(
-                      future: Api().getActorDetails(id.toString()),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          if (snapshot.data.profilePath == null) {
-                            return Container();
+          Observer(
+            builder: (_) => Container(
+              height:
+                  controller.appController.subscribedActors.isEmpty ? 0 : 250,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                  color: color),
+              child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.appController.subscribedActors.length,
+                  itemBuilder: (context, index) {
+                    var id = controller.appController.subscribedActors[index];
+                    return FutureBuilder<ActorDetails>(
+                        future: GetActorDetailsUsecase(
+                            actorId: id.toString(),
+                            repository: controller.actorDetailsRepository)(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            if (snapshot.data.profilePath == null) {
+                              return Container();
+                            } else {
+                              return PersonFavouriteCard(
+                                  actorDetails: snapshot.data);
+                            }
                           } else {
-                            return PersonFavouriteCard(
-                                actorDetails: snapshot.data);
+                            return CircularProgressIndicator();
                           }
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      });
-                }),
-          )
+                        });
+                  }),
+            ),
+          ),
         ],
       ),
     );

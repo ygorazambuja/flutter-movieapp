@@ -1,14 +1,17 @@
 import 'package:yshare/app/modules/film_page/widgets/person_crew_card.dart';
-import 'package:yshare/model/film.dart';
-import 'package:yshare/model/film_credit.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/entities/film_credit.dart';
+import 'package:yshare/domain/repository/film_credit/film_credit_abstract_repository.dart';
+import 'package:yshare/domain/usecases/film_credits/get_film_credits_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CrewHorizontalList extends StatelessWidget {
+  final FilmCreditAbstractRepository repository;
   const CrewHorizontalList({
     Key key,
     @required this.film,
+    @required this.repository,
   }) : super(key: key);
 
   final Film film;
@@ -16,7 +19,8 @@ class CrewHorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<FilmCredit>(
-      future: Api().getFilmCredits(film.id.toString()),
+      future: GetFilmCreditsUsecase(
+          filmId: film.id.toString(), repository: repository)(),
       builder: (context, snapshot) {
         var filmCredit = snapshot.data;
         if (snapshot.hasData) {

@@ -5,8 +5,8 @@ import 'package:yshare/app/modules/film_page/widgets/film_page_crew_list.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_recommendation_list.dart';
 import 'package:yshare/app/modules/film_page/widgets/genres_chip_list.dart';
 import 'package:yshare/components/cast_horizontal_list.dart';
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/usecases/film/get_film_by_id_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -28,17 +28,14 @@ class FilmPagePage extends StatefulWidget {
 class _FilmPagePageState
     extends ModularState<FilmPagePage, FilmPageController> {
   //use 'controller' variable to access controller
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<Film>(
-        future: Api().getFilmById(widget.id),
+        future: GetFilmByIdUsecase(
+          id: widget.id,
+          repository: controller.repository,
+        )(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -64,9 +61,16 @@ class _FilmPagePageState
                     FilmInfo(film: snapshot.data),
                     GenresChipList(film: snapshot.data),
                     FilmOverviewWidget(film: snapshot.data),
-                    CastHorizontalList(film: snapshot.data),
-                    FilmPageCrewList(id: snapshot.data.id.toString()),
+                    CastHorizontalList(
+                      film: snapshot.data,
+                      repository: controller.filmCreditRepository,
+                    ),
+                    FilmPageCrewList(
+                      id: snapshot.data.id.toString(),
+                      repository: controller.filmCreditRepository,
+                    ),
                     FilmRecommendationList(
+                      controller: controller,
                       id: widget.id,
                       color: Colors.green[800],
                     ),

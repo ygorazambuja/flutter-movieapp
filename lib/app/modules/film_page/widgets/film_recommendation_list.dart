@@ -1,14 +1,17 @@
+import 'package:yshare/app/modules/film_page/film_page_controller.dart';
 import 'package:yshare/components/card_film.dart';
-import 'package:yshare/model/film.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/usecases/film/get_recommendations_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilmRecommendationList extends StatelessWidget {
+  final FilmPageController controller;
   const FilmRecommendationList({
     Key key,
     @required this.id,
-    this.color,
+    @required this.color,
+    @required this.controller,
   }) : super(key: key);
 
   final String id;
@@ -18,7 +21,8 @@ class FilmRecommendationList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: FutureBuilder<List<Film>>(
-          future: Api().getRecommendations(id),
+          future: GetRecommendationsUsecase(
+              filmId: id, page: 1, repository: controller.repository)(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

@@ -3,8 +3,8 @@ import 'package:yshare/app/modules/actor_page/widgets/actor_movie_list_widget.da
 import 'package:yshare/app/modules/actor_page/widgets/actor_page_app_bar.dart';
 import 'package:yshare/app/modules/actor_page/widgets/actor_participation_widget.dart';
 import 'package:yshare/app/modules/actor_page/widgets/actor_tv_participation_widget.dart';
-import 'package:yshare/model/actor_details.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
+import 'package:yshare/domain/usecases/actor_details/get_actor_details_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'actor_page_controller.dart';
@@ -31,7 +31,8 @@ class _ActorPagePageState
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder<ActorDetails>(
-      future: Api().getActorDetails(widget.id),
+      future: GetActorDetailsUsecase(
+          actorId: widget.id, repository: controller.actorDetailsRepository)(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -51,13 +52,19 @@ class _ActorPagePageState
                     id: widget.id,
                   ),
                   ActorInfoWidget(
+                    controller: controller,
                     actorDetails: snapshot.data,
                   ),
                   ActorMovieListWidget(
-                      id: snapshot.data.id.toString(), color: Colors.blue[300]),
+                      controller: controller,
+                      id: snapshot.data.id.toString(),
+                      color: Colors.blue[300]),
                   ActorParticipationWidget(
-                      id: snapshot.data.id.toString(), color: Colors.teal[300]),
+                      controller: controller,
+                      id: snapshot.data.id.toString(),
+                      color: Colors.teal[300]),
                   ActorTvParticipationWidget(
+                    controller: controller,
                     id: snapshot.data.id.toString(),
                     color: Colors.deepOrange,
                   )

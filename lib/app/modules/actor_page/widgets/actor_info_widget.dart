@@ -1,14 +1,18 @@
-import 'package:yshare/model/actor_details.dart';
-import 'package:yshare/model/actor_participation.dart';
-import 'package:yshare/provider/api.dart';
+import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
+import 'package:yshare/domain/entities/actor_participation.dart';
+import 'package:yshare/domain/usecases/actor_participation/get_actor_participation_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class ActorInfoWidget extends StatelessWidget {
   final ActorDetails actorDetails;
+  final ActorPageController controller;
 
-  const ActorInfoWidget({Key key, this.actorDetails}) : super(key: key);
+  const ActorInfoWidget(
+      {Key key, @required this.actorDetails, @required this.controller})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -40,8 +44,10 @@ class ActorInfoWidget extends StatelessWidget {
                         fontFamily: GoogleFonts.poppins().fontFamily),
                   ),
                   FutureBuilder<ActorParticipation>(
-                      future: Api()
-                          .getActorParticipation(actorDetails.id.toString()),
+                      future: GetActorParticipationUsecase(
+                          actorId: actorDetails.id.toString(),
+                          repository:
+                              controller.actorParticipationRepository)(),
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.none:
