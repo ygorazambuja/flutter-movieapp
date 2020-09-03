@@ -1,7 +1,7 @@
+import 'package:yshare/api_key.dart';
 import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/repository/actor_details/actor_details_abstract_repository.dart';
 import 'package:yshare/infra/dio_singleton_provider.dart';
-import 'package:yshare/shared/constants.dart';
 
 class ActorDetailsImplementationRepository
     extends ActorDetailsAbstractRepository {

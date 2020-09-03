@@ -1,7 +1,7 @@
+import 'package:yshare/api_key.dart';
 import 'package:yshare/domain/entities/actor_participation.dart';
 import 'package:yshare/domain/repository/actor_participation/actor_participation_abstract_repository.dart';
 import 'package:yshare/infra/dio_singleton_provider.dart';
-import 'package:yshare/shared/constants.dart';
 
 class ActorParticipationImplementationRepository
     extends ActorParticipationAbstractRepository {

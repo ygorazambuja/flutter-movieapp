@@ -1,3 +1,4 @@
+import 'package:yshare/api_key.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/entities/tv.dart';
 import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
@@ -87,7 +88,7 @@ class FilmImplementationRepository extends FilmAbstractRepository {
   @override
   Future<List<Map<String, dynamic>>> multiSearch(String param, int page) async {
     final _endpoint =
-        'https://api.themoviedb.org/3/search/multi?api_key=ab319f50a3792c49e23a3336df9f0d80&language=en-US$QUERY$param$PAGE$page';
+        'https://api.themoviedb.org/3/search/multi$API_KEY&language=en-US$QUERY$param$PAGE$page';
     final response = await connection.request(_endpoint);
 
     var resultSearch = <Map<String, dynamic>>[];
