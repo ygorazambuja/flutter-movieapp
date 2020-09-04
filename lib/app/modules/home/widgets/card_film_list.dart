@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/repository/actor_details/actor_details_abstract_repository.dart';
 import 'package:yshare/domain/usecases/actor_details/get_actor_details_usecase.dart';
 import 'package:yshare/shared/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CardFilmList extends StatelessWidget {
   final List<int> actors;
@@ -17,6 +17,7 @@ class CardFilmList extends StatelessWidget {
       @required this.color,
       @required this.repository})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

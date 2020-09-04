@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/domain/entities/crew.dart';
 import 'package:yshare/shared/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PersonCrewCard extends StatelessWidget {
   const PersonCrewCard({Key key, this.crew}) : super(key: key);

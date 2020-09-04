@@ -2,12 +2,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'last_episode_to_air.g.dart';
 
-@JsonSerializable(createFactory: true, createToJson: true)
+@JsonSerializable(
+  createFactory: true,
+  createToJson: true,
+)
 class LastEpisodeToAir {
   @JsonKey(name: 'air_date')
   final String airDate;
   @JsonKey(name: 'episode_number')
-  final int episode_number;
+  final int episodeNumber;
   final int id;
   final String name;
   final String overview;
@@ -27,7 +30,7 @@ class LastEpisodeToAir {
 
   LastEpisodeToAir({
     this.airDate,
-    this.episode_number,
+    this.episodeNumber,
     this.id,
     this.name,
     this.overview,
@@ -41,5 +44,11 @@ class LastEpisodeToAir {
 
   factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) =>
       _$LastEpisodeToAirFromJson(json);
+
   Map<String, dynamic> toJson() => _$LastEpisodeToAirToJson(this);
+
+  @override
+  String toString() {
+    return 'LastEpisodeToAir(airDate: $airDate, episodeNumber: $episodeNumber, id: $id, name: $name, overview: $overview, productionCode: $productionCode, seasonNumber: $seasonNumber, showId: $showId, stillPath: $stillPath, voteAverage: $voteAverage, voteCount: $voteCount)';
+  }
 }

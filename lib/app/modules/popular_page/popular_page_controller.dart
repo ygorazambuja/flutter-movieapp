@@ -12,8 +12,10 @@ class PopularPageController = _PopularPageControllerBase
 
 abstract class _PopularPageControllerBase with Store {
   final AppController appController;
+
   _PopularPageControllerBase(
       {@required this.appController, @required this.repository});
+
   final FilmAbstractRepository repository;
 
   @observable

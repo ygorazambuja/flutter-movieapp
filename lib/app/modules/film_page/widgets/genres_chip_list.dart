@@ -1,7 +1,7 @@
-import 'package:yshare/domain/entities/film.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yshare/domain/entities/film.dart';
 
 class GenresChipList extends StatelessWidget {
   const GenresChipList({

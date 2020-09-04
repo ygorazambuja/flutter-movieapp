@@ -11,6 +11,7 @@ class MultiSearchUsecase {
     @required this.page,
     @required this.repository,
   });
+
   Future<List<Map<String, dynamic>>> call() async {
     return await repository.multiSearch(searchParam, page);
   }

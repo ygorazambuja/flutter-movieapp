@@ -10,6 +10,7 @@ class GetPersonTvParticipationUsecase {
     @required this.personId,
     @required this.repository,
   });
+
   Future<List<TvParticipation>> call() async {
     return await repository.getPersonTvParticipation(personId);
   }

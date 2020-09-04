@@ -6,6 +6,7 @@ import 'package:yshare/infra/dio_singleton_provider.dart';
 class ActorParticipationImplementationRepository
     extends ActorParticipationAbstractRepository {
   final connection = DioSingletonProvider.getConnection;
+
   @override
   Future<ActorParticipation> getActorParticipation(String actorId) async {
     final _endpoint =

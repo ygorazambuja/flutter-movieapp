@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/actor_page/widgets/actor_info_widget.dart';
 import 'package:yshare/app/modules/actor_page/widgets/actor_movie_list_widget.dart';
 import 'package:yshare/app/modules/actor_page/widgets/actor_page_app_bar.dart';
@@ -5,8 +7,7 @@ import 'package:yshare/app/modules/actor_page/widgets/actor_participation_widget
 import 'package:yshare/app/modules/actor_page/widgets/actor_tv_participation_widget.dart';
 import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/usecases/actor_details/get_actor_details_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'actor_page_controller.dart';
 
 class ActorPagePage extends StatefulWidget {
@@ -67,6 +68,9 @@ class _ActorPagePageState
                     controller: controller,
                     id: snapshot.data.id.toString(),
                     color: Colors.deepOrange,
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(padding: const EdgeInsets.only(top: 10)),
                   )
                 ],
                 physics: BouncingScrollPhysics(),

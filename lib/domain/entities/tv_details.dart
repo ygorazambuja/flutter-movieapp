@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'package:yshare/domain/entities/next_episode_to_air.dart';
 import 'package:yshare/domain/entities/production_companies.dart';
 import 'package:yshare/domain/entities/season.dart';
@@ -91,5 +92,11 @@ class TvDetails {
 
   factory TvDetails.fromJson(Map<String, dynamic> json) =>
       _$TvDetailsFromJson(json);
+
   Map<String, dynamic> toJson() => _$TvDetailsToJson(this);
+
+  @override
+  String toString() {
+    return 'TvDetails(backdropPath: $backdropPath, createdBy: $createdBy, episodeRunTime: $episodeRunTime, firstAirDate: $firstAirDate, genres: $genres, homepage: $homepage, id: $id, inProduction: $inProduction, languages: $languages, lastAirDate: $lastAirDate, lastEpisodeToAir: $lastEpisodeToAir, name: $name, nextEpisodeToAir: $nextEpisodeToAir, networks: $networks, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, originCountry: $originCountry, originalLanguage: $originalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, seasons: $seasons, status: $status, type: $type, voteAverage: $voteAverage, voteCount: $voteCount)';
+  }
 }

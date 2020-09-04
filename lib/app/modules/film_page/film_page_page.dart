@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_info.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_overview_widget.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_page_app_bar.dart';
@@ -7,8 +9,6 @@ import 'package:yshare/app/modules/film_page/widgets/genres_chip_list.dart';
 import 'package:yshare/components/cast_horizontal_list.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/usecases/film/get_film_by_id_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import 'film_page_controller.dart';
 
@@ -21,6 +21,7 @@ class FilmPagePage extends StatefulWidget {
     @required this.id,
     this.title = 'FilmPage',
   }) : super(key: key);
+
   @override
   _FilmPagePageState createState() => _FilmPagePageState();
 }

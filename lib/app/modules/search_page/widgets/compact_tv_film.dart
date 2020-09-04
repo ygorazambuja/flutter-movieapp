@@ -9,13 +9,15 @@ class CompactTvFilm extends StatelessWidget {
   final Tv tv;
 
   const CompactTvFilm({Key key, this.tv}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    if (tv.posterPath == null) {
-      return FlutterLogo();
-    } else {
-      return Column(
+    return Container(
+      height: 250,
+      width: 200,
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
             onTap: () {
@@ -23,35 +25,25 @@ class CompactTvFilm extends StatelessWidget {
                 '/tvPage/${tv.id}',
               );
             },
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              borderOnForeground: false,
-              elevation: 10,
-              clipBehavior: Clip.antiAlias,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  '$IMAGE_BASE_URL${tv.posterPath}',
-                  fit: BoxFit.cover,
-                  height: 180,
-                ),
-              ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: tv.posterPath != null
+                  ? Image.network(
+                      '$IMAGE_BASE_URL${tv.posterPath}',
+                      height: 150,
+                    )
+                  : Container(
+                      height: 150,
+                    ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 2.0),
-            child: Text(
-              '${tv.originalName}',
-              style: TextStyle(
+          Text(
+            '${tv.originalName}',
+            textAlign: TextAlign.center,
+            style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
                 fontWeight: FontWeight.bold,
-              ),
-              overflow: TextOverflow.fade,
-              maxLines: 2,
-              softWrap: true,
-              textScaleFactor: 0.9,
-            ),
+                fontSize: 10),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +61,7 @@ class CompactTvFilm extends StatelessWidget {
             ],
           )
         ],
-      );
-    }
+      ),
+    );
   }
 }

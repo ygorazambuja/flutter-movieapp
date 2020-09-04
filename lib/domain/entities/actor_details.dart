@@ -42,6 +42,7 @@ class ActorDetails {
 
   factory ActorDetails.fromJson(Map<String, dynamic> json) =>
       _$ActorDetailsFromJson(json);
+
   Map<String, dynamic> toJson() => _$ActorDetailsToJson(this);
 
   @override

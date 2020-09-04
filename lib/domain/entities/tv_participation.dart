@@ -56,6 +56,7 @@ class TvParticipation {
 
   factory TvParticipation.fromJson(Map<String, dynamic> json) =>
       _$TvParticipationFromJson(json);
+
   Map<String, dynamic> toJson() => _$TvParticipationToJson(this);
 
   @override

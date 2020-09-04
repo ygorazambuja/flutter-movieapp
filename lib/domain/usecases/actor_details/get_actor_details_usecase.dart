@@ -10,6 +10,7 @@ class GetActorDetailsUsecase {
     @required this.actorId,
     @required this.repository,
   });
+
   Future<ActorDetails> call() async {
     return await repository.getActorDetails(actorId);
   }

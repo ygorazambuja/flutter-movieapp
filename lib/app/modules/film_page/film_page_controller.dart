@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:yshare/app/app_controller.dart';
 import 'package:mobx/mobx.dart';
+import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
 import 'package:yshare/domain/repository/film_credit/film_credit_abstract_repository.dart';
 

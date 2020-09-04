@@ -27,5 +27,11 @@ class Season {
   });
 
   factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
+
   Map<String, dynamic> toJson() => _$SeasonToJson(this);
+
+  @override
+  String toString() {
+    return 'Season(airDate: $airDate, episodeCount: $episodeCount, id: $id, name: $name, overview: $overview, posterPath: $posterPath, seasonNumber: $seasonNumber)';
+  }
 }

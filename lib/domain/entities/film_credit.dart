@@ -15,6 +15,7 @@ class FilmCredit {
 
   factory FilmCredit.fromJson(Map<String, dynamic> json) =>
       _$FilmCreditFromJson(json);
+
   Map<String, dynamic> toJson() => _$FilmCreditToJson(this);
 
   @override

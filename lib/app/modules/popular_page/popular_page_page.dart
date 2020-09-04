@@ -5,11 +5,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
+
 import 'popular_page_controller.dart';
 
 class PopularPagePage extends StatefulWidget {
   final AppController controller;
   final String title;
+
   const PopularPagePage({Key key, this.title = 'PopularPage', this.controller})
       : super(key: key);
 

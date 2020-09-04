@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
 import 'package:yshare/components/card_film.dart';
 import 'package:yshare/domain/entities/actor_participation.dart';
 import 'package:yshare/domain/usecases/actor_participation/get_actor_participation_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ActorMovieListWidget extends StatelessWidget {
   final String id;
@@ -35,7 +35,8 @@ class ActorMovieListWidget extends StatelessWidget {
               );
               break;
             case ConnectionState.done:
-              if (snapshot.data is ActorParticipation) {
+              if (snapshot.data is ActorParticipation &&
+                  snapshot.data.cast.isNotEmpty) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

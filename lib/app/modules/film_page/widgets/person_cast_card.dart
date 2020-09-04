@@ -1,8 +1,8 @@
-import 'package:yshare/domain/entities/cast.dart';
-import 'package:yshare/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yshare/domain/entities/cast.dart';
+import 'package:yshare/shared/constants.dart';
 
 class PersonCastCard extends StatelessWidget {
   const PersonCastCard({
@@ -53,11 +53,11 @@ class PersonCastCard extends StatelessWidget {
               softWrap: true,
             ),
           ),
-          cast.character != null
+          cast.character != null && cast.character.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.only(top: 2.0),
                   child: Text(
-                    '${cast.character}',
+                    'as ${cast.character}',
                     style: TextStyle(
                       fontSize: 10,
                       fontFamily: GoogleFonts.poppins().fontFamily,

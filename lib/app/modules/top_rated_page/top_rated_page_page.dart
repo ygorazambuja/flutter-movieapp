@@ -5,11 +5,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
+
 import 'top_rated_page_controller.dart';
 
 class TopRatedPagePage extends StatefulWidget {
   final AppController controller;
   final String title;
+
   const TopRatedPagePage(
       {Key key, this.title = 'TopRatedPage', this.controller})
       : super(key: key);

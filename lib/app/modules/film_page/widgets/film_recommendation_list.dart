@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/film_page/film_page_controller.dart';
 import 'package:yshare/components/card_film.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/usecases/film/get_recommendations_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FilmRecommendationList extends StatelessWidget {
   final FilmPageController controller;
+
   const FilmRecommendationList({
     Key key,
     @required this.id,

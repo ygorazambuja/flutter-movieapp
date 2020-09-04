@@ -9,7 +9,7 @@ part of 'last_episode_to_air.dart';
 LastEpisodeToAir _$LastEpisodeToAirFromJson(Map<String, dynamic> json) {
   return LastEpisodeToAir(
     airDate: json['air_date'] as String,
-    episode_number: json['episode_number'] as int,
+    episodeNumber: json['episode_number'] as int,
     id: json['id'] as int,
     name: json['name'] as String,
     overview: json['overview'] as String,
@@ -25,7 +25,7 @@ LastEpisodeToAir _$LastEpisodeToAirFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$LastEpisodeToAirToJson(LastEpisodeToAir instance) =>
     <String, dynamic>{
       'air_date': instance.airDate,
-      'episode_number': instance.episode_number,
+      'episode_number': instance.episodeNumber,
       'id': instance.id,
       'name': instance.name,
       'overview': instance.overview,

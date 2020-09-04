@@ -27,6 +27,7 @@ class Cast {
       this.profilePath});
 
   factory Cast.fromJson(Map<String, dynamic> json) => _$CastFromJson(json);
+
   Map<String, dynamic> toJson() => _$CastToJson(this);
 
   @override

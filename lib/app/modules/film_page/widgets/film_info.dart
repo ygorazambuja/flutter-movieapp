@@ -1,8 +1,8 @@
-import 'package:yshare/domain/entities/film.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:yshare/domain/entities/film.dart';
 
 class FilmInfo extends StatelessWidget {
   const FilmInfo({
@@ -56,21 +56,30 @@ class FilmInfo extends StatelessWidget {
                   )
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '${Duration(minutes: film.runtime).inHours.toString()}hr ${Duration(minutes: film.runtime).inMinutes.remainder(60)} Minutes',
-                  style: TextStyle(
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w200),
-                ),
-              ),
-              Text(
-                '${DateFormat(DateFormat.MONTH).format(DateTime.parse(film.releaseDate))} ${DateFormat(DateFormat.YEAR).format(DateTime.parse(film.releaseDate))}',
-                style: TextStyle(
-                    fontFamily: GoogleFonts.poppins().fontFamily, fontSize: 12),
-              )
+              film.runtime != 0 && film.runtime != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '${Duration(minutes: film.runtime).inHours.toString()}hr ${Duration(minutes: film.runtime).inMinutes.remainder(60)} Minutes',
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.poppins().fontFamily,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w200),
+                      ),
+                    )
+                  : Container(),
+              film.releaseDate.isNotEmpty
+                  ? Text(
+                      '${DateFormat(DateFormat.MONTH).format(DateTime.parse(film.releaseDate))}'
+                      '${DateFormat(DateFormat.YEAR).format(DateTime.parse(film.releaseDate))}',
+                      style: TextStyle(
+                          fontFamily: GoogleFonts.poppins().fontFamily,
+                          fontSize: 12),
+                    )
+                  : Text('No release date',
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: GoogleFonts.poppins().fontFamily))
             ],
           ),
         ],

@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
 import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/entities/actor_participation.dart';
 import 'package:yshare/domain/usecases/actor_participation/get_actor_participation_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class ActorInfoWidget extends StatelessWidget {
   final ActorDetails actorDetails;
@@ -13,6 +13,7 @@ class ActorInfoWidget extends StatelessWidget {
   const ActorInfoWidget(
       {Key key, @required this.actorDetails, @required this.controller})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -20,6 +21,7 @@ class ActorInfoWidget extends StatelessWidget {
         children: [
           Text(
             actorDetails.name,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
                 fontSize: 36,

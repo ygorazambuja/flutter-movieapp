@@ -42,6 +42,7 @@ class Film {
   List<ProductionCompanies> productionCompanies;
   @JsonKey(name: 'production_countries')
   List<ProductionCountries> productionCountries;
+
   Film(
       {this.id,
       this.video,
@@ -63,6 +64,7 @@ class Film {
       this.runtime});
 
   factory Film.fromJson(Map<String, dynamic> json) => _$FilmFromJson(json);
+
   Map<String, dynamic> toJson() => _$FilmToJson(this);
 
   @override

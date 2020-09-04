@@ -1,8 +1,8 @@
+import 'package:mobx/mobx.dart';
 import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
 import 'package:yshare/domain/usecases/film/get_film_by_genre_usecase.dart';
-import 'package:mobx/mobx.dart';
 
 part 'genre_page_controller.g.dart';
 
@@ -39,7 +39,6 @@ abstract class _GenrePageControllerBase with Store {
   Future<void> fetchFilmsByGenre() async {
     var response = await GetFilmByGenreUsecase(
         genreId: genreId, page: actualPage, repository: repository)();
-    print(response);
     for (var film in response) {
       films.add(film);
     }

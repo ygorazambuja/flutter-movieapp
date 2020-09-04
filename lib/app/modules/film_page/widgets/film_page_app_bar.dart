@@ -1,10 +1,10 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:yshare/app/modules/film_page/film_page_controller.dart';
-import 'package:yshare/domain/entities/film.dart';
-import 'package:yshare/shared/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:yshare/app/modules/film_page/film_page_controller.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/shared/constants.dart';
 
 class FilmPageAppBar extends StatelessWidget {
   final FilmPageController controller;

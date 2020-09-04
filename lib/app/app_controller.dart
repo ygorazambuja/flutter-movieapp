@@ -11,6 +11,7 @@ abstract class _AppControllerBase with Store {
     loadTheme();
     loadFavouriteFilms();
     loadSubscribedActors();
+    loadFavouriteSeries();
   }
 
   @observable
@@ -21,6 +22,9 @@ abstract class _AppControllerBase with Store {
 
   @observable
   List<int> favouriteFilms = [];
+
+  @observable
+  List<int> favouriteSeries = [];
 
   @computed
   bool get isDark => themeType.brightness == Brightness.dark;
@@ -59,7 +63,7 @@ abstract class _AppControllerBase with Store {
     return stringArray;
   }
 
-  void saveListInSharedPreferences() {
+  void saveFilmsInSharedPreferences() {
     SharedPreferences.getInstance().then((instance) {
       instance.setStringList(
           'favouriteFilms', listIntegerToString(favouriteFilms));
@@ -89,13 +93,24 @@ abstract class _AppControllerBase with Store {
   }
 
   @action
+  Future<void> loadFavouriteSeries() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('favouriteSeries')) {
+      var series = prefs.getStringList('favouriteSeries');
+      series.map((e) {
+        favouriteSeries.add(int.parse(e));
+      }).toList();
+    }
+  }
+
+  @action
   void addFilmIntoFavourites(int filmId) {
     if (!favouriteFilms.contains(filmId)) {
       favouriteFilms = List.from(favouriteFilms..add(filmId));
-      saveListInSharedPreferences();
+      saveFilmsInSharedPreferences();
     } else {
       favouriteFilms = List.from(favouriteFilms..remove(filmId));
-      saveListInSharedPreferences();
+      saveFilmsInSharedPreferences();
     }
   }
 
@@ -104,6 +119,24 @@ abstract class _AppControllerBase with Store {
       instance.setStringList(
           'subscribedActors', listIntegerToString(subscribedActors));
     });
+  }
+
+  void saveFavouriteSeries() {
+    SharedPreferences.getInstance().then((instance) {
+      instance.setStringList(
+          'favouriteSeries', listIntegerToString(favouriteSeries));
+    });
+  }
+
+  @action
+  void addSerieInFavourite(int serieId) {
+    if (!favouriteSeries.contains(serieId)) {
+      favouriteSeries = List.from(favouriteSeries..add(serieId));
+      saveFavouriteSeries();
+    } else {
+      favouriteSeries = List.from(favouriteSeries..remove(serieId));
+      saveFavouriteSeries();
+    }
   }
 
   @action

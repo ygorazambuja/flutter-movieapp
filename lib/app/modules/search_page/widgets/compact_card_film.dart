@@ -1,9 +1,10 @@
-import 'package:yshare/domain/entities/film.dart';
-import 'package:yshare/shared/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/shared/constants.dart';
 
 class CompactCardFilm extends StatelessWidget {
   const CompactCardFilm({
@@ -15,11 +16,12 @@ class CompactCardFilm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (film.posterPath == null) {
-      return FlutterLogo();
-    } else {
-      return Column(
+    return Container(
+      height: 250,
+      width: 200,
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           InkWell(
             onTap: () {
@@ -27,35 +29,25 @@ class CompactCardFilm extends StatelessWidget {
                 '/filmPage/${film.id}',
               );
             },
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              borderOnForeground: false,
-              elevation: 10,
-              clipBehavior: Clip.antiAlias,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  '$IMAGE_BASE_URL${film.posterPath}',
-                  fit: BoxFit.cover,
-                  height: 180,
-                ),
-              ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: film.posterPath != null
+                  ? Image.network(
+                      '$IMAGE_BASE_URL${film.posterPath}',
+                      height: 150,
+                    )
+                  : Container(
+                      height: 150,
+                    ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 2.0),
-            child: Text(
-              '${film.title}',
-              style: TextStyle(
+          Text(
+            '${film.title}',
+            textAlign: TextAlign.center,
+            style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
                 fontWeight: FontWeight.bold,
-              ),
-              overflow: TextOverflow.fade,
-              maxLines: 2,
-              softWrap: true,
-              textScaleFactor: 0.9,
-            ),
+                fontSize: 10),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +65,7 @@ class CompactCardFilm extends StatelessWidget {
             ],
           )
         ],
-      );
-    }
+      ),
+    );
   }
 }

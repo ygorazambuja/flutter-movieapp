@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/home/home_controller.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/usecases/film/get_popular_film_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'film_horizontal_list.dart';
 
@@ -13,6 +13,7 @@ class PopularList extends StatelessWidget {
 
   const PopularList({Key key, @required this.color, @required this.controller})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

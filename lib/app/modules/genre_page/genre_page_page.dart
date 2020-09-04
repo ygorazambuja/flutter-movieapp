@@ -1,16 +1,17 @@
-import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
-import 'package:yshare/shared/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
+import 'package:yshare/shared/constants.dart';
 
 import 'genre_page_controller.dart';
 
 class GenrePagePage extends StatefulWidget {
   final String title;
   final String id;
+
   const GenrePagePage({
     Key key,
     this.title = 'GenrePage',

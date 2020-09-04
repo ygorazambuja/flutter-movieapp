@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/film_page/widgets/person_cast_card.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/entities/film_credit.dart';
 import 'package:yshare/domain/repository/film_credit/film_credit_abstract_repository.dart';
 import 'package:yshare/domain/usecases/film_credits/get_film_credits_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CastHorizontalList extends StatelessWidget {
   final FilmCreditAbstractRepository repository;

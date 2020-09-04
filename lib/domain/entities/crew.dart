@@ -24,6 +24,7 @@ class Crew {
       this.profilePath});
 
   factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
+
   Map<String, dynamic> toJson() => _$CrewToJson(this);
 
   @override

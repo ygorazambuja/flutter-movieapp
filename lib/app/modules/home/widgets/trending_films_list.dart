@@ -10,6 +10,7 @@ import 'film_horizontal_list.dart';
 class TrendingFilmList extends StatelessWidget {
   final Color color;
   final FilmAbstractRepository repository;
+
   const TrendingFilmList({
     Key key,
     @required this.repository,

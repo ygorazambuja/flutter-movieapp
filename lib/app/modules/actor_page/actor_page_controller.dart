@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:yshare/app/app_controller.dart';
 import 'package:mobx/mobx.dart';
+import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/domain/repository/actor_details/actor_details_abstract_repository.dart';
 import 'package:yshare/domain/repository/actor_participation/actor_participation_abstract_repository.dart';
 import 'package:yshare/domain/repository/tv_participation/tv_participation_abstract_repository.dart';

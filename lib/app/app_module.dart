@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/app_widget.dart';
 import 'package:yshare/app/modules/actor_page/actor_page_page.dart';
 import 'package:yshare/app/modules/film_page/film_page_controller.dart';
@@ -6,8 +8,6 @@ import 'package:yshare/app/modules/genre_page/genre_page_page.dart';
 import 'package:yshare/app/modules/home/home_module.dart';
 import 'package:yshare/app/modules/popular_page/popular_page_page.dart';
 import 'package:yshare/app/modules/search_page/search_page_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/top_rated_page/top_rated_page_page.dart';
 import 'package:yshare/app/modules/trending_page/trending_page_page.dart';
 import 'package:yshare/app/modules/tv_page/tv_page_page.dart';
@@ -15,6 +15,7 @@ import 'package:yshare/infra/repository/actor_details/actor_details_implementati
 import 'package:yshare/infra/repository/actor_participation/actor_participation_implementation_repository.dart';
 import 'package:yshare/infra/repository/film/film_implementation_repository.dart';
 import 'package:yshare/infra/repository/film_credit/film_credit_implementation_repository.dart';
+import 'package:yshare/infra/repository/tv/tv_implementation_repository.dart';
 import 'package:yshare/infra/repository/tv_participation/tv_participation_implementation_repository.dart';
 
 import 'app_controller.dart';
@@ -37,7 +38,9 @@ class AppModule extends MainModule {
           ),
         ),
         Bind(
-          (i) => TvPageController(appController: i.get<AppController>()),
+          (i) => TvPageController(
+              appController: i.get<AppController>(),
+              repository: TvImplementationRepository()),
         ),
         Bind(
           (i) => TopRatedPageController(

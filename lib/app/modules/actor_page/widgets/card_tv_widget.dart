@@ -1,9 +1,9 @@
-import 'package:bot_toast/bot_toast.dart';
-import 'package:yshare/domain/entities/tv_participation.dart';
-import 'package:yshare/shared/constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yshare/domain/entities/tv_participation.dart';
+import 'package:yshare/shared/constants.dart';
 
 class CardTvWidget extends StatelessWidget {
   const CardTvWidget({
@@ -25,9 +25,7 @@ class CardTvWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           InkWell(
-            onTap: () => BotToast.showNotification(
-              title: (cancelFunc) => Text('not implemented yet !'),
-            ),
+            onTap: () => Modular.to.pushNamed('/tvPage/${tvParticipation.id}'),
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),

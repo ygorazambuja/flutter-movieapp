@@ -62,6 +62,22 @@ mixin _$AppController on _AppControllerBase, Store {
     });
   }
 
+  final _$favouriteSeriesAtom =
+      Atom(name: '_AppControllerBase.favouriteSeries');
+
+  @override
+  List<int> get favouriteSeries {
+    _$favouriteSeriesAtom.reportRead();
+    return super.favouriteSeries;
+  }
+
+  @override
+  set favouriteSeries(List<int> value) {
+    _$favouriteSeriesAtom.reportWrite(value, super.favouriteSeries, () {
+      super.favouriteSeries = value;
+    });
+  }
+
   final _$loadThemeAsyncAction = AsyncAction('_AppControllerBase.loadTheme');
 
   @override
@@ -85,6 +101,15 @@ mixin _$AppController on _AppControllerBase, Store {
   Future<void> loadSubscribedActors() {
     return _$loadSubscribedActorsAsyncAction
         .run(() => super.loadSubscribedActors());
+  }
+
+  final _$loadFavouriteSeriesAsyncAction =
+      AsyncAction('_AppControllerBase.loadFavouriteSeries');
+
+  @override
+  Future<void> loadFavouriteSeries() {
+    return _$loadFavouriteSeriesAsyncAction
+        .run(() => super.loadFavouriteSeries());
   }
 
   final _$_AppControllerBaseActionController =
@@ -113,6 +138,17 @@ mixin _$AppController on _AppControllerBase, Store {
   }
 
   @override
+  void addSerieInFavourite(int serieId) {
+    final _$actionInfo = _$_AppControllerBaseActionController.startAction(
+        name: '_AppControllerBase.addSerieInFavourite');
+    try {
+      return super.addSerieInFavourite(serieId);
+    } finally {
+      _$_AppControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addActorInFavourites(int actorId) {
     final _$actionInfo = _$_AppControllerBaseActionController.startAction(
         name: '_AppControllerBase.addActorInFavourites');
@@ -129,6 +165,7 @@ mixin _$AppController on _AppControllerBase, Store {
 themeType: ${themeType},
 subscribedActors: ${subscribedActors},
 favouriteFilms: ${favouriteFilms},
+favouriteSeries: ${favouriteSeries},
 isDark: ${isDark}
     ''';
   }

@@ -6,6 +6,7 @@ import 'package:yshare/shared/constants.dart';
 
 class FilmCreditImplementationRepository extends FilmCreditAbstractRepository {
   final connection = DioSingletonProvider.getConnection;
+
   @override
   Future<FilmCredit> getFilmCredits(String id) async {
     final _endpoint =

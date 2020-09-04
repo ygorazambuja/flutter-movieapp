@@ -3,12 +3,12 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:yshare/app/modules/tv_page/tv_page_controller.dart';
-import 'package:yshare/domain/entities/tv.dart';
+import 'package:yshare/domain/entities/tv_details.dart';
 import 'package:yshare/shared/constants.dart';
 
 class TvPageAppBar extends StatelessWidget {
   final TvPageController controller;
-  final Tv tv;
+  final TvDetails tv;
 
   const TvPageAppBar({
     Key key,
@@ -28,7 +28,7 @@ class TvPageAppBar extends StatelessWidget {
       actions: [
         Observer(
           builder: (context) => IconButton(
-            icon: controller.appController.favouriteFilms.contains(tv.id)
+            icon: controller.appController.favouriteSeries.contains(tv.id)
                 ? Icon(
                     EvaIcons.star,
                     color: Colors.amber[800],
@@ -38,9 +38,9 @@ class TvPageAppBar extends StatelessWidget {
                     color: Colors.amber[800],
                   ),
             onPressed: () {
-              controller.appController.addFilmIntoFavourites(tv.id);
+              controller.appController.addSerieInFavourite(tv.id);
 
-              controller.appController.favouriteFilms.contains(tv.id)
+              controller.appController.favouriteSeries.contains(tv.id)
                   ? BotToast.showNotification(
                       title: (cancelFunc) => Wrap(
                         direction: Axis.horizontal,
@@ -54,8 +54,8 @@ class TvPageAppBar extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                '${tv.originalName} added in favourites !'),
+                            child:
+                                Text('${tv.originalName} added in favourites!'),
                           ),
                         ],
                       ),

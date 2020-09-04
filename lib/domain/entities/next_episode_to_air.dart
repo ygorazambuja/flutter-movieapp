@@ -39,5 +39,11 @@ class NextEpisodeToAir {
 
   factory NextEpisodeToAir.fromJson(Map<String, dynamic> json) =>
       _$NextEpisodeToAirFromJson(json);
+
   Map<String, dynamic> toJson() => _$NextEpisodeToAirToJson(this);
+
+  @override
+  String toString() {
+    return 'NextEpisodeToAir(airDate: $airDate, episodeNumber: $episodeNumber, id: $id, name: $name, overview: $overview, productionCode: $productionCode, seasonNumber: $seasonNumber, showId: $showId, stillPath: $stillPath, voteAverage: $voteAverage, voteCount: $voteCount)';
+  }
 }

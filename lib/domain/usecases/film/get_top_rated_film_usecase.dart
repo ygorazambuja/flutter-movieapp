@@ -10,6 +10,7 @@ class GetTopRatedFilmUsecase {
     @required this.page,
     @required this.repository,
   });
+
   Future<List<Film>> call() async {
     return await repository.getTopRated(page);
   }

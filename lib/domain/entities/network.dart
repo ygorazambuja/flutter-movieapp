@@ -20,5 +20,11 @@ class Network {
 
   factory Network.fromJson(Map<String, dynamic> json) =>
       _$NetworkFromJson(json);
+
   Map<String, dynamic> toJson() => _$NetworkToJson(this);
+
+  @override
+  String toString() {
+    return 'Network(name: $name, id: $id, logoPath: $logoPath, originCountry: $originCountry)';
+  }
 }

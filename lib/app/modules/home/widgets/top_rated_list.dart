@@ -1,15 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/home/home_controller.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/usecases/film/get_top_rated_film_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'film_horizontal_list.dart';
 
 class TopRatedList extends StatelessWidget {
   final Color color;
   final HomeController controller;
+
   const TopRatedList({
     Key key,
     @required this.color,

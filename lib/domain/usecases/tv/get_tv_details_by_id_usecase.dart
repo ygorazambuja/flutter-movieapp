@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:yshare/domain/entities/tv.dart';
+import 'package:yshare/domain/entities/tv_details.dart';
 import 'package:yshare/domain/repository/tv/tv_abstract_repository.dart';
 
 class GetTvDetailsByIdUsecase {
@@ -11,7 +11,7 @@ class GetTvDetailsByIdUsecase {
     @required this.id,
   });
 
-  Future<Tv> call() async {
+  Future<TvDetails> call() async {
     return await repository.getTvDetailsById(id);
   }
 }

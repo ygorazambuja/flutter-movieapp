@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:mobx/mobx.dart';
 import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
 import 'package:yshare/domain/usecases/film/multi_search_usecase.dart';
-import 'package:mobx/mobx.dart';
 
 part 'search_page_controller.g.dart';
 

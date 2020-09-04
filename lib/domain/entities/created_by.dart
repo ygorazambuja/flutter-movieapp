@@ -22,5 +22,11 @@ class CreatedBy {
 
   factory CreatedBy.fromJson(Map<String, dynamic> json) =>
       _$CreatedByFromJson(json);
+
   Map<String, dynamic> toJson() => _$CreatedByToJson(this);
+
+  @override
+  String toString() {
+    return 'CreatedBy(id: $id, creditId: $creditId, name: $name, gender: $gender, profilePath: $profilePath)';
+  }
 }

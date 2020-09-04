@@ -47,5 +47,11 @@ class Tv {
   });
 
   factory Tv.fromJson(Map<String, dynamic> json) => _$TvFromJson(json);
+
   Map<String, dynamic> toJson() => _$TvToJson(this);
+
+  @override
+  String toString() {
+    return 'Tv(originalName: $originalName, genreIds: $genreIds, mediaType: $mediaType, name: $name, popularity: $popularity, originCountry: $originCountry, voteCount: $voteCount, firstAirDate: $firstAirDate, backdropPath: $backdropPath, originalLanguage: $originalLanguage, id: $id, voteAverage: $voteAverage, overview: $overview, posterPath: $posterPath)';
+  }
 }
