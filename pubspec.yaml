@@ -17,9 +17,15 @@ environment:
     sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-    bot_toast: ^3.0.4
     flutter:
-        sdk: flutter
+      sdk: flutter
+
+
+    admob_flutter: ^0.3.4
+
+    firebase_core:
+    firebase_analytics:
+    bot_toast: ^3.0.4
     intl: ^0.16.1
     json_annotation:
     dio: ^3.0.10
@@ -30,6 +36,7 @@ dependencies:
     google_fonts: 1.1.0
     shared_preferences: ^0.5.10
     flutter_launcher_icons: 0.7.5
+    random_color: 1.0.5
     # The following adds the Cupertino Icons font to your application.
     # Use with the CupertinoIcons class for iOS style icons.
 dev_dependencies:
@@ -48,15 +55,15 @@ flutter:
     # The following line ensures that the Material Icons font is
     # included with your application, so that you can use the icons in
     # the material Icons class.
-    uses-material-design: true
+  uses-material-design: true
     # To add assets to your application, add an assets section, like this:
-    assets:
-        - assets/images/
+  assets:
+    - assets/images/
 
 scripts:
-    build: flutter pub run build_runner build --delete-conflicting-outputs
+  build: flutter pub run build_runner build --delete-conflicting-outputs
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/chair.png"
+  image_path: "assets/images/yshare-logo.png"

@@ -1,7 +1,10 @@
+import 'dart:io';
+
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:random_color/random_color.dart';
 import 'package:yshare/app/modules/home/widgets/chips_lists.dart';
 import 'package:yshare/app/modules/home/widgets/favourite_actor_list.dart';
 import 'package:yshare/app/modules/home/widgets/favourite_film_list.dart';
@@ -11,7 +14,8 @@ import 'package:yshare/app/modules/home/widgets/home_app_bar.dart';
 import 'package:yshare/app/modules/home/widgets/popular_list.dart';
 import 'package:yshare/app/modules/home/widgets/top_rated_list.dart';
 import 'package:yshare/app/modules/home/widgets/trending_films_list.dart';
-
+import 'package:yshare/components/footer_widget.dart';
+import 'package:yshare/components/main_drawer.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,70 +32,88 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
+  RandomColor color = RandomColor();
+
+  final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldState,
       body: Observer(
         builder: (_) {
           return Stack(
             children: [
               CustomScrollView(
                 slivers: [
-                  HomeAppBar(),
+                  HomeAppBar(scaffoldState: _scaffoldState),
                   FormSearchField(),
                   TrendingFilmList(
                     repository: controller.filmRepository,
-                    color: Colors.purple[300],
+                    color: color.randomColor().withOpacity(0.6),
+                  ),
+                  SliverToBoxAdapter(
+                    child: AdmobBanner(
+                      adUnitId: 'ca-app-pub-8572242041813835/2364549169',
+                      adSize: AdmobBannerSize.BANNER,
+                      listener:
+                          (AdmobAdEvent event, Map<String, dynamic> args) {
+                        print(event);
+                      },
+                    ),
                   ),
                   FavouriteFilmList(
-                    color: Colors.green[800],
+                    color: color.randomColor().withOpacity(0.6),
                     controller: controller,
                   ),
                   FavouriteActorList(
                     controller: controller,
-                    color: Colors.blue[400],
+                    color: color.randomColor().withOpacity(0.6),
                   ),
                   FavouriteTvList(
                     controller: controller,
-                    color: Colors.greenAccent,
+                    color: color.randomColor().withOpacity(0.6),
                   ),
                   ChipList(),
                   PopularList(
                     controller: controller,
-                    color: Colors.orange,
+                    color: color.randomColor().withOpacity(0.6),
+                  ),
+                  SliverToBoxAdapter(
+                    child: AdmobBanner(
+                      adUnitId: 'ca-app-pub-8572242041813835/7511868408',
+                      adSize: AdmobBannerSize.BANNER,
+                      listener:
+                          (AdmobAdEvent event, Map<String, dynamic> args) {
+                        print(event);
+                      },
+                    ),
                   ),
                   TopRatedList(
                     controller: controller,
-                    color: Colors.pink[400],
+                    color: color.randomColor().withOpacity(0.6),
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                     ),
                   ),
+                  FooterWidget(),
                   SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Text(
-                          'powered by: ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: GoogleFonts.aBeeZee().fontFamily),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              'assets/images/the_movie_db.png',
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: AdmobBanner(
+                      adUnitId: 'ca-app-pub-8572242041813835/2259541727',
+                      adSize: AdmobBannerSize.BANNER,
+                      listener:
+                          (AdmobAdEvent event, Map<String, dynamic> args) {
+                        print(event);
+                      },
                     ),
-                  )
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 200),
+                    ),
+                  ),
                 ],
                 physics: BouncingScrollPhysics(),
               ),
@@ -99,7 +121,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           );
         },
       ),
-      drawer: Drawer(),
     );
   }
 }

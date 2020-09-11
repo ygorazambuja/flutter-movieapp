@@ -1,9 +1,12 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/search_page/widgets/compact_card_film.dart';
+import 'package:yshare/app/modules/search_page/widgets/compact_cast_card.dart';
 import 'package:yshare/app/modules/search_page/widgets/compact_tv_film.dart';
 import 'package:yshare/app/modules/search_page/widgets/search_page_bar.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/entities/tv.dart';
 
@@ -26,6 +29,7 @@ class _SearchPagePageState
 
   final ScrollController _scrollController = ScrollController();
 
+  AdmobBannerSize bannerSize;
   void _scrollListener() {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
@@ -44,6 +48,7 @@ class _SearchPagePageState
 
   @override
   void initState() {
+    bannerSize = AdmobBannerSize.BANNER;
     super.initState();
     controller.setSearchName(widget.name);
     controller.fetchMultiSearch();
@@ -67,16 +72,31 @@ class _SearchPagePageState
                 ),
                 itemCount: controller.films.length,
                 physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) =>
-                    controller.films[index]['media_type'] == 'tv'
-                        ? CompactTvFilm(
-                            tv: Tv.fromJson(controller.films[index]),
-                          )
-                        : CompactCardFilm(
-                            film: Film.fromJson(controller.films[index])),
+                itemBuilder: (context, index) {
+                  if (controller.films[index]['media_type'] == 'tv') {
+                    return CompactTvFilm(
+                      tv: Tv.fromJson(
+                        controller.films[index],
+                      ),
+                    );
+                  } else if (controller.films[index]['media_type'] == 'movie') {
+                    return CompactCardFilm(
+                      film: Film.fromJson(
+                        controller.films[index],
+                      ),
+                    );
+                  } else {
+                    return CompactCastCard(
+                        actorDetails:
+                            ActorDetails.fromJson(controller.films[index]));
+                  }
+                },
               ),
             ),
-            SliverToBoxAdapter(child: CircularProgressIndicator())
+            SliverToBoxAdapter(
+                child: Padding(
+              padding: const EdgeInsets.all(20),
+            ))
           ],
         ),
       ),

@@ -46,6 +46,7 @@ class CardTvWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 2.0),
             child: Text(
               '${tvParticipation.name}',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
                 fontWeight: FontWeight.bold,

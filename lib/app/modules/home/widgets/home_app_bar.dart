@@ -6,6 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/app/modules/home/home_controller.dart';
 
 class HomeAppBar extends StatefulWidget {
+  final GlobalKey<ScaffoldState> scaffoldState;
+
+  const HomeAppBar({Key key, @required this.scaffoldState}) : super(key: key);
+
   @override
   _HomeAppBarState createState() => _HomeAppBarState();
 }
@@ -29,7 +33,9 @@ class _HomeAppBarState extends ModularState<HomeAppBar, HomeController> {
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50))),
       leading: IconButton(
         icon: Icon(EvaIcons.menu2Outline),
-        onPressed: () {},
+        onPressed: () {
+          widget.scaffoldState.currentState.openDrawer();
+        },
       ),
       actions: [
         Observer(

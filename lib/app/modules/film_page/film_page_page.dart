@@ -40,9 +40,7 @@ class _FilmPagePageState
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return Center(
-                child: Text('Without Internet access'),
-              );
+              return Container();
               break;
             case ConnectionState.waiting:
               return Center(
@@ -73,20 +71,20 @@ class _FilmPagePageState
                     FilmRecommendationList(
                       controller: controller,
                       id: widget.id,
-                      color: Colors.green[800],
+                      color: Colors.green[800].withOpacity(0.4),
                     ),
+                    SliverToBoxAdapter(
+                        child: Container(
+                      padding: const EdgeInsets.all(10),
+                    ))
                   ],
                 );
               } else {
-                return Center(
-                  child: Text('Something wrong happened'),
-                );
+                return Container();
               }
               break;
             default:
-              return Center(
-                child: Text('Something wrong happened'),
-              );
+              return Container();
           }
         },
       ),

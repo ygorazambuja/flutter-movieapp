@@ -1,4 +1,5 @@
 import 'package:yshare/api_key.dart';
+import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/domain/entities/tv.dart';
 import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
@@ -100,6 +101,9 @@ class FilmImplementationRepository extends FilmAbstractRepository {
 
       if (json['media_type'] == 'movie') {
         resultSearch.add(Film.fromJson(json).toJson());
+      }
+      if (json['known_for_department'] != null) {
+        resultSearch.add(ActorDetails.fromJson(json).toJson());
       }
     }
     return resultSearch;

@@ -17,27 +17,40 @@ class PersonCastCard extends StatelessWidget {
     return Container(
       width: 150,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           InkWell(
             onTap: () => Modular.to.pushNamed(
               '/actorPage/${cast.id}',
             ),
             child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              borderOnForeground: false,
-              elevation: 10,
-              clipBehavior: Clip.antiAlias,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  '$IMAGE_BASE_URL${cast.profilePath}',
-                  fit: BoxFit.cover,
-                  height: 100,
-                ),
-              ),
-            ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                borderOnForeground: false,
+                elevation: 10,
+                clipBehavior: Clip.antiAlias,
+                child: cast.profilePath != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          '$IMAGE_BASE_URL${cast.profilePath}',
+                          fit: BoxFit.cover,
+                          height: 100,
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: cast.gender == 0
+                            ? Image.asset(
+                                'assets/images/male_placeholder.jpg',
+                                fit: BoxFit.cover,
+                                height: 100,
+                              )
+                            : Image.asset(
+                                'assets/images/female_placeholder.jpg',
+                                fit: BoxFit.cover,
+                                height: 100,
+                              ))),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 2.0),
@@ -58,6 +71,7 @@ class PersonCastCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 2.0),
                   child: Text(
                     'as ${cast.character}',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 10,
                       fontFamily: GoogleFonts.poppins().fontFamily,

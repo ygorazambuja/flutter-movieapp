@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:yshare/app/modules/film_page/film_page_controller.dart';
 import 'package:yshare/domain/entities/film.dart';
 import 'package:yshare/shared/constants.dart';
 
-class FilmPageAppBar extends StatelessWidget {
+class FilmPageAppBar extends StatefulWidget {
   final FilmPageController controller;
   final Film film;
 
@@ -14,6 +15,25 @@ class FilmPageAppBar extends StatelessWidget {
     @required this.controller,
     @required this.film,
   });
+
+  @override
+  _FilmPageAppBarState createState() => _FilmPageAppBarState();
+}
+
+class _FilmPageAppBarState extends State<FilmPageAppBar> {
+  AdmobInterstitial interstitial;
+
+  @override
+  void initState() {
+    super.initState();
+    interstitial = AdmobInterstitial(
+      adUnitId: 'ca-app-pub-8572242041813835/3380858187',
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitial.load();
+      },
+    );
+    interstitial.load();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +47,8 @@ class FilmPageAppBar extends StatelessWidget {
       actions: [
         Observer(
           builder: (context) => IconButton(
-            icon: controller.appController.favouriteFilms.contains(film.id)
+            icon: widget.controller.appController.favouriteFilms
+                    .contains(widget.film.id)
                 ? Icon(
                     EvaIcons.star,
                     color: Colors.amber[800],
@@ -37,9 +58,12 @@ class FilmPageAppBar extends StatelessWidget {
                     color: Colors.amber[800],
                   ),
             onPressed: () {
-              controller.appController.addFilmIntoFavourites(film.id);
+              interstitial.show();
+              widget.controller.appController
+                  .addFilmIntoFavourites(widget.film.id);
 
-              controller.appController.favouriteFilms.contains(film.id)
+              widget.controller.appController.favouriteFilms
+                      .contains(widget.film.id)
                   ? BotToast.showNotification(
                       title: (cancelFunc) => Wrap(
                         direction: Axis.horizontal,
@@ -53,7 +77,8 @@ class FilmPageAppBar extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text('${film.title} added in favourites !'),
+                            child: Text(
+                                '${widget.film.title} added in favourites !'),
                           ),
                         ],
                       ),
@@ -71,8 +96,8 @@ class FilmPageAppBar extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child:
-                                Text('${film.title} removed from favourites !'),
+                            child: Text(
+                                '${widget.film.title} removed from favourites !'),
                           ),
                         ],
                       ),
@@ -81,14 +106,14 @@ class FilmPageAppBar extends StatelessWidget {
           ),
         ),
         IconButton(
-          icon: controller.appController.isDark
+          icon: widget.controller.appController.isDark
               ? Icon(EvaIcons.sun)
               : Icon(
                   EvaIcons.moon,
                   color: Colors.black,
                 ),
           onPressed: () {
-            controller.appController.changeTheme();
+            widget.controller.appController.changeTheme();
           },
         )
       ],
@@ -100,10 +125,10 @@ class FilmPageAppBar extends StatelessWidget {
           Container(
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
-              child: film.posterPath == null
+              child: widget.film.posterPath == null
                   ? Container()
                   : Image.network(
-                      IMAGE_BASE_URL + film.posterPath,
+                      IMAGE_BASE_URL + widget.film.posterPath,
                       fit: BoxFit.fitWidth,
                     ),
             ),

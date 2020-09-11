@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/domain/entities/season.dart';
 import 'package:yshare/shared/constants.dart';
 
 class SeasonHorizontalList extends StatelessWidget {
   final List<Season> seasons;
+  final String id;
 
-  const SeasonHorizontalList({Key key, @required this.seasons})
+  const SeasonHorizontalList(
+      {Key key, @required this.seasons, @required this.id})
       : super(key: key);
 
   @override
@@ -42,7 +45,8 @@ class SeasonHorizontalList extends StatelessWidget {
                   itemBuilder: (context, index) => Column(
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () => Modular.to.pushNamed(
+                                '/tvPage/$id/season/${seasons[index].seasonNumber}'),
                             child: Card(
                               color: Colors.white,
                               elevation: 5,

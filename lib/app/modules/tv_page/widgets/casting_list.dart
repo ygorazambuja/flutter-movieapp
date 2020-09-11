@@ -34,8 +34,7 @@ class CastingList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 20),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Text('Cast',
                         style: TextStyle(
                             fontFamily: GoogleFonts.poppins().fontFamily,
@@ -43,7 +42,7 @@ class CastingList extends StatelessWidget {
                             fontSize: 16)),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 10),
+                    margin: const EdgeInsets.only(right: 10),
                     padding: const EdgeInsets.only(top: 20),
                     height: 180,
                     width: MediaQuery.of(context).size.width,

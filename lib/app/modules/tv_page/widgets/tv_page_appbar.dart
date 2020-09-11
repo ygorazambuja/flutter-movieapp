@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:yshare/app/modules/tv_page/tv_page_controller.dart';
 import 'package:yshare/domain/entities/tv_details.dart';
 import 'package:yshare/shared/constants.dart';
 
-class TvPageAppBar extends StatelessWidget {
+class TvPageAppBar extends StatefulWidget {
   final TvPageController controller;
   final TvDetails tv;
 
@@ -15,6 +16,25 @@ class TvPageAppBar extends StatelessWidget {
     @required this.controller,
     @required this.tv,
   }) : super(key: key);
+
+  @override
+  _TvPageAppBarState createState() => _TvPageAppBarState();
+}
+
+class _TvPageAppBarState extends State<TvPageAppBar> {
+  AdmobInterstitial interstitial;
+
+  @override
+  void initState() {
+    super.initState();
+    interstitial = AdmobInterstitial(
+      adUnitId: 'ca-app-pub-8572242041813835/5029175293',
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitial.load();
+      },
+    );
+    interstitial.load();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +48,8 @@ class TvPageAppBar extends StatelessWidget {
       actions: [
         Observer(
           builder: (context) => IconButton(
-            icon: controller.appController.favouriteSeries.contains(tv.id)
+            icon: widget.controller.appController.favouriteSeries
+                    .contains(widget.tv.id)
                 ? Icon(
                     EvaIcons.star,
                     color: Colors.amber[800],
@@ -38,9 +59,11 @@ class TvPageAppBar extends StatelessWidget {
                     color: Colors.amber[800],
                   ),
             onPressed: () {
-              controller.appController.addSerieInFavourite(tv.id);
+              interstitial.show();
+              widget.controller.appController.addSerieInFavourite(widget.tv.id);
 
-              controller.appController.favouriteSeries.contains(tv.id)
+              widget.controller.appController.favouriteSeries
+                      .contains(widget.tv.id)
                   ? BotToast.showNotification(
                       title: (cancelFunc) => Wrap(
                         direction: Axis.horizontal,
@@ -54,8 +77,8 @@ class TvPageAppBar extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child:
-                                Text('${tv.originalName} added in favourites!'),
+                            child: Text(
+                                '${widget.tv.originalName} added in favourites!'),
                           ),
                         ],
                       ),
@@ -74,7 +97,7 @@ class TvPageAppBar extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                                '${tv.originalName} removed from favourites !'),
+                                '${widget.tv.originalName} removed from favourites !'),
                           ),
                         ],
                       ),
@@ -83,14 +106,14 @@ class TvPageAppBar extends StatelessWidget {
           ),
         ),
         IconButton(
-          icon: controller.appController.isDark
+          icon: widget.controller.appController.isDark
               ? Icon(EvaIcons.sun)
               : Icon(
                   EvaIcons.moon,
                   color: Colors.black,
                 ),
           onPressed: () {
-            controller.appController.changeTheme();
+            widget.controller.appController.changeTheme();
           },
         )
       ],
@@ -102,10 +125,10 @@ class TvPageAppBar extends StatelessWidget {
           Container(
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
-              child: tv.posterPath == null
+              child: widget.tv.posterPath == null
                   ? Container()
                   : Image.network(
-                      IMAGE_BASE_URL + tv.posterPath,
+                      IMAGE_BASE_URL + widget.tv.posterPath,
                       fit: BoxFit.fitWidth,
                     ),
             ),

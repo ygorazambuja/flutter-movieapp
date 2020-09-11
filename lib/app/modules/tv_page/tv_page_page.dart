@@ -62,7 +62,10 @@ class _TvPagePageState extends ModularState<TvPagePage, TvPageController> {
                 CreatedByWidget(tv: tv),
                 ProductionCompaniesHorizontalList(
                     productionCompanies: tv.productionCompanies),
-                SeasonHorizontalList(seasons: tv.seasons),
+                SeasonHorizontalList(
+                  seasons: tv.seasons,
+                  id: tv.id.toString(),
+                ),
                 TvInfoWidget(tv: tv),
                 CastingList(
                   tv: tv,

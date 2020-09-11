@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:yshare/app/modules/actor_page/actor_page_controller.dart';
 import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/shared/constants.dart';
 
-class ActorPageAppBar extends StatelessWidget {
+class ActorPageAppBar extends StatefulWidget {
   final ActorPageController controller;
   final dynamic id;
   final ActorDetails actorDetails;
@@ -19,6 +20,25 @@ class ActorPageAppBar extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _ActorPageAppBarState createState() => _ActorPageAppBarState();
+}
+
+class _ActorPageAppBarState extends State<ActorPageAppBar> {
+  AdmobInterstitial interstitial;
+
+  @override
+  void initState() {
+    super.initState();
+    interstitial = AdmobInterstitial(
+      adUnitId: 'ca-app-pub-8572242041813835/9563316676',
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        if (event == AdmobAdEvent.closed) interstitial.load();
+      },
+    );
+    interstitial.load();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return SliverAppBar(
@@ -26,8 +46,8 @@ class ActorPageAppBar extends StatelessWidget {
         Observer(
           builder: (_) {
             return IconButton(
-              icon: controller.appController.subscribedActors
-                      .contains(int.parse(id))
+              icon: widget.controller.appController.subscribedActors
+                      .contains(int.parse(widget.id))
                   ? Icon(
                       EvaIcons.star,
                       color: Colors.amber[800],
@@ -37,9 +57,12 @@ class ActorPageAppBar extends StatelessWidget {
                       color: Colors.amber[800],
                     ),
               onPressed: () {
-                controller.appController.addActorInFavourites(int.parse(id));
-                controller.appController.subscribedActors
-                        .contains(int.parse(id))
+                interstitial.show();
+
+                widget.controller.appController
+                    .addActorInFavourites(int.parse(widget.id));
+                widget.controller.appController.subscribedActors
+                        .contains(int.parse(widget.id))
                     ? BotToast.showNotification(
                         title: (cancelFunc) => Wrap(
                           direction: Axis.horizontal,
@@ -54,7 +77,7 @@ class ActorPageAppBar extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                  '${actorDetails.name} added in favourites !'),
+                                  '${widget.actorDetails.name} added in favourites !'),
                             ),
                           ],
                         ),
@@ -73,7 +96,7 @@ class ActorPageAppBar extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                  '${actorDetails.name} removed from favourites !'),
+                                  '${widget.actorDetails.name} removed from favourites !'),
                             ),
                           ],
                         ),
@@ -84,10 +107,10 @@ class ActorPageAppBar extends StatelessWidget {
         ),
         Observer(builder: (_) {
           return IconButton(
-              icon: controller.appController.isDark
+              icon: widget.controller.appController.isDark
                   ? Icon(EvaIcons.sun)
                   : Icon(EvaIcons.moon),
-              onPressed: () => controller.appController.changeTheme());
+              onPressed: () => widget.controller.appController.changeTheme());
         })
       ],
       backgroundColor: Colors.transparent,
@@ -103,9 +126,9 @@ class ActorPageAppBar extends StatelessWidget {
           Container(
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
-              child: actorDetails.profilePath != null
+              child: widget.actorDetails.profilePath != null
                   ? Image.network(
-                      IMAGE_BASE_URL + actorDetails.profilePath,
+                      IMAGE_BASE_URL + widget.actorDetails.profilePath,
                       fit: BoxFit.fitWidth,
                     )
                   : Container(),
