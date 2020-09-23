@@ -8,16 +8,20 @@ class ActorDetails {
   @JsonKey(name: 'known_for_department')
   String knownForDepartment;
   String deathday;
+
   int id;
+
   String name;
   @JsonKey(name: 'also_known_as')
   List<String> alsoKnownAs;
+
   int gender;
   String biography;
   num popularity;
   @JsonKey(name: 'place_of_birth')
   String placeOfBirth;
   @JsonKey(name: 'profile_path')
+  // ignore: annotate_overrides
   String profilePath;
   bool adult;
   @JsonKey(name: 'imdb_id')

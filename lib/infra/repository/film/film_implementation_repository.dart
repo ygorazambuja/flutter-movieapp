@@ -1,6 +1,7 @@
 import 'package:yshare/api_key.dart';
 import 'package:yshare/domain/entities/actor_details.dart';
 import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/entities/review.dart';
 import 'package:yshare/domain/entities/tv.dart';
 import 'package:yshare/domain/repository/film/film_abstract_repository.dart';
 import 'package:yshare/infra/dio_singleton_provider.dart';
@@ -107,5 +108,19 @@ class FilmImplementationRepository extends FilmAbstractRepository {
       }
     }
     return resultSearch;
+  }
+
+  @override
+  Future<List<Review>> getFilmReview(String id, int page) async {
+    final _endpoint =
+        'https://api.themoviedb.org/3/movie/$id/reviews$API_KEY&language=en-US$PAGE$page';
+
+    final response = await connection.request(_endpoint);
+    final reviews = <Review>[];
+
+    for (var json in response.data['results']) {
+      reviews.add(Review.fromJson(json));
+    }
+    return reviews;
   }
 }

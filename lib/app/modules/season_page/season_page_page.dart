@@ -10,12 +10,14 @@ class SeasonPagePage extends StatefulWidget {
   final String title;
   final String showId;
   final String seasonId;
+  final String showName;
 
   const SeasonPagePage({
     Key key,
     this.title = 'SeasonPage',
     @required this.showId,
     @required this.seasonId,
+    @required this.showName,
   }) : super(key: key);
 
   @override
@@ -54,8 +56,11 @@ class _SeasonPagePageState
                           seasonDetails: snapshot.data,
                         ),
                         EpisodeListWidget(
-                          episodes: snapshot.data.episodes,
-                        ),
+                            episodes: snapshot.data.episodes,
+                            appController: controller.appController,
+                            seasonId: widget.seasonId,
+                            showId: widget.showId,
+                            showName: widget.showName),
                         SliverToBoxAdapter(
                           child: Container(
                             height: 200,

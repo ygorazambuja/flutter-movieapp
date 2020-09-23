@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,8 @@ class CompactCardFilm extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: film.posterPath != null
-                  ? Image.network(
-                      '$IMAGE_BASE_URL${film.posterPath}',
+                  ? CachedNetworkImage(
+                      imageUrl: '$IMAGE_BASE_URL${film.posterPath}',
                       height: 150,
                     )
                   : Container(

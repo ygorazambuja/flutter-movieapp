@@ -5,6 +5,7 @@ import 'package:yshare/app/modules/film_page/widgets/film_overview_widget.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_page_app_bar.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_page_crew_list.dart';
 import 'package:yshare/app/modules/film_page/widgets/film_recommendation_list.dart';
+import 'package:yshare/app/modules/film_page/widgets/film_review_list.dart';
 import 'package:yshare/app/modules/film_page/widgets/genres_chip_list.dart';
 import 'package:yshare/components/cast_horizontal_list.dart';
 import 'package:yshare/domain/entities/film.dart';
@@ -72,6 +73,10 @@ class _FilmPagePageState
                       controller: controller,
                       id: widget.id,
                       color: Colors.green[800].withOpacity(0.4),
+                    ),
+                    FilmReviewList(
+                      id: snapshot.data.id.toString(),
+                      repository: controller.repository,
                     ),
                     SliverToBoxAdapter(
                         child: Container(

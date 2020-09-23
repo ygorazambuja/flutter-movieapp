@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yshare/domain/entities/favourite_episode.dart';
 
 part 'app_controller.g.dart';
 
@@ -12,6 +15,7 @@ abstract class _AppControllerBase with Store {
     loadFavouriteFilms();
     loadSubscribedActors();
     loadFavouriteSeries();
+    loadFavouriteEpisodes();
   }
 
   @observable
@@ -25,6 +29,9 @@ abstract class _AppControllerBase with Store {
 
   @observable
   List<int> favouriteSeries = [];
+
+  @observable
+  List<FavouriteEpisode> favouriteEpisodes = [];
 
   @computed
   bool get isDark => themeType.brightness == Brightness.dark;
@@ -147,6 +154,39 @@ abstract class _AppControllerBase with Store {
     } else {
       subscribedActors = List.from(subscribedActors..remove(actorId));
       saveSubscribedActors();
+    }
+  }
+
+  @action
+  void addEpisodeIntoFavourites(FavouriteEpisode favouriteEpisode) {
+    favouriteEpisodes.contains(favouriteEpisode)
+        ? favouriteEpisodes =
+            List.from(favouriteEpisodes..remove(favouriteEpisode))
+        : favouriteEpisodes =
+            List.from(favouriteEpisodes..add(favouriteEpisode));
+
+    saveFavouriteEpisodes();
+  }
+
+  void saveFavouriteEpisodes() {
+    var stringList = <String>[];
+    favouriteEpisodes
+        .map((e) => stringList.add(json.encode(e.toJson())))
+        .toList();
+    print(stringList);
+    SharedPreferences.getInstance().then((instance) {
+      instance.setStringList('favouriteEpisodes', stringList);
+    });
+  }
+
+  @action
+  Future<void> loadFavouriteEpisodes() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('favouriteEpisodes')) {
+      var episodes = prefs.getStringList('favouriteEpisodes');
+      episodes.map((e) {
+        favouriteEpisodes..add(FavouriteEpisode.fromJson(json.decode(e)));
+      }).toList();
     }
   }
 }

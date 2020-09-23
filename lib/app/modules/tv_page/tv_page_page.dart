@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/modules/tv_page/widgets/casting_list.dart';
 import 'package:yshare/app/modules/tv_page/widgets/created_by_widget.dart';
 import 'package:yshare/app/modules/tv_page/widgets/production_companies_horizontal_list.dart';
+import 'package:yshare/app/modules/tv_page/widgets/reviews_list_widget.dart';
 import 'package:yshare/app/modules/tv_page/widgets/seasons_horizontal_list.dart';
 import 'package:yshare/app/modules/tv_page/widgets/title_widget.dart';
 import 'package:yshare/app/modules/tv_page/widgets/tv_info_widget.dart';
@@ -41,16 +42,14 @@ class _TvPagePageState extends ModularState<TvPagePage, TvPageController> {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return Center(
-              child: Column(
-                children: [Text('No connection'), CircularProgressIndicator()],
-              ),
-            );
+                child: Column(children: [
+              Text('No connection'),
+              CircularProgressIndicator()
+            ]));
             break;
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Center(child: CircularProgressIndicator());
             break;
           case ConnectionState.done:
             var tv = snapshot.data;
@@ -65,16 +64,14 @@ class _TvPagePageState extends ModularState<TvPagePage, TvPageController> {
                 SeasonHorizontalList(
                   seasons: tv.seasons,
                   id: tv.id.toString(),
+                  showName: tv.name,
                 ),
                 TvInfoWidget(tv: tv),
-                CastingList(
-                  tv: tv,
-                  controller: controller,
-                ),
+                CastingList(tv: tv, controller: controller),
+                ReviewsListWidget(
+                    id: tv.id.toString(), repository: controller.repository),
                 SliverToBoxAdapter(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                  ),
+                  child: Container(padding: const EdgeInsets.all(10)),
                 )
               ],
               physics: BouncingScrollPhysics(),

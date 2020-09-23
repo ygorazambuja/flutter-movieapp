@@ -1,5 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -27,12 +28,55 @@ class _FilmPageAppBarState extends State<FilmPageAppBar> {
   void initState() {
     super.initState();
     interstitial = AdmobInterstitial(
-      adUnitId: 'ca-app-pub-8572242041813835/3380858187',
+      adUnitId: FILM_INTERSTICIAL,
       listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        if (event == AdmobAdEvent.closed) interstitial.load();
+        if (event == AdmobAdEvent.closed) {
+          interstitial.load();
+          showNotification();
+        }
       },
     );
     interstitial.load();
+  }
+
+  void showNotification() {
+    widget.controller.appController.favouriteFilms.contains(widget.film.id)
+        ? BotToast.showNotification(
+            title: (cancelFunc) => Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    EvaIcons.heart,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('${widget.film.title} added in favourites !'),
+                ),
+              ],
+            ),
+          )
+        : BotToast.showNotification(
+            title: (cancelFunc) => Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    EvaIcons.heartOutline,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('${widget.film.title} removed from favourites !'),
+                ),
+              ],
+            ),
+          );
   }
 
   @override
@@ -62,46 +106,7 @@ class _FilmPageAppBarState extends State<FilmPageAppBar> {
               widget.controller.appController
                   .addFilmIntoFavourites(widget.film.id);
 
-              widget.controller.appController.favouriteFilms
-                      .contains(widget.film.id)
-                  ? BotToast.showNotification(
-                      title: (cancelFunc) => Wrap(
-                        direction: Axis.horizontal,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              EvaIcons.heart,
-                              color: Colors.red,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                '${widget.film.title} added in favourites !'),
-                          ),
-                        ],
-                      ),
-                    )
-                  : BotToast.showNotification(
-                      title: (cancelFunc) => Wrap(
-                        direction: Axis.horizontal,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              EvaIcons.heartOutline,
-                              color: Colors.red,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                '${widget.film.title} removed from favourites !'),
-                          ),
-                        ],
-                      ),
-                    );
+              showNotification();
             },
           ),
         ),
@@ -127,8 +132,8 @@ class _FilmPageAppBarState extends State<FilmPageAppBar> {
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
               child: widget.film.posterPath == null
                   ? Container()
-                  : Image.network(
-                      IMAGE_BASE_URL + widget.film.posterPath,
+                  : CachedNetworkImage(
+                      imageUrl: IMAGE_BASE_URL + widget.film.posterPath,
                       fit: BoxFit.fitWidth,
                     ),
             ),

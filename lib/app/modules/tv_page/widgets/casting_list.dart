@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,7 +35,8 @@ class CastingList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding:
+                        const EdgeInsets.only(top: 20, bottom: 20, right: 20),
                     child: Text('Cast',
                         style: TextStyle(
                             fontFamily: GoogleFonts.poppins().fontFamily,
@@ -98,8 +100,8 @@ class CastCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: cast.profilePath != null
-                  ? Image.network(
-                      '$IMAGE_BASE_URL${cast.profilePath}',
+                  ? CachedNetworkImage(
+                      imageUrl: '$IMAGE_BASE_URL${cast.profilePath}',
                       fit: BoxFit.fitWidth,
                       width: 120,
                       height: 120,

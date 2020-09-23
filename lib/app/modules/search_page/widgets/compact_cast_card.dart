@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,8 +29,8 @@ class CompactCastCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: actorDetails.profilePath != null
-                  ? Image.network(
-                      '$IMAGE_BASE_URL${actorDetails.profilePath}',
+                  ? CachedNetworkImage(
+                      imageUrl: '$IMAGE_BASE_URL${actorDetails.profilePath}',
                       height: 150,
                     )
                   : Container(

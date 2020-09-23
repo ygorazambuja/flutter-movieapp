@@ -1,3 +1,6 @@
+import 'package:yshare/app/modules/drawer_page/drawer_page_page.dart';
+
+import 'modules/drawer_page/drawer_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/app_widget.dart';
@@ -33,6 +36,7 @@ import 'modules/tv_page/tv_page_controller.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => DrawerPageController(i.get<AppController>())),
         Bind((i) => SeasonPageController(
             appController: i.get<AppController>(),
             repository: TvSeasonImplementationRepository())),
@@ -130,10 +134,18 @@ class AppModule extends MainModule {
           '/tvPage/:id',
           child: (context, args) => TvPagePage(id: args.params['id']),
         ),
-        ModularRouter('/tvPage/:showId/season/:seasonId',
-            child: (context, args) => SeasonPagePage(
-                showId: args.params['showId'],
-                seasonId: args.params['seasonId'])),
+        ModularRouter(
+          '/tvPage/:showId/season/:seasonId',
+          child: (context, args) => SeasonPagePage(
+            showId: args.params['showId'],
+            seasonId: args.params['seasonId'],
+            showName: args.data['showName'],
+          ),
+        ),
+        ModularRouter(
+          '/drawerPage',
+          child: (_, __) => DrawerPagePage(),
+        )
       ];
 
   @override

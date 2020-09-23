@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,9 +8,13 @@ import 'package:yshare/shared/constants.dart';
 class SeasonHorizontalList extends StatelessWidget {
   final List<Season> seasons;
   final String id;
+  final String showName;
 
   const SeasonHorizontalList(
-      {Key key, @required this.seasons, @required this.id})
+      {Key key,
+      @required this.seasons,
+      @required this.id,
+      @required this.showName})
       : super(key: key);
 
   @override
@@ -46,7 +51,8 @@ class SeasonHorizontalList extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () => Modular.to.pushNamed(
-                                '/tvPage/$id/season/${seasons[index].seasonNumber}'),
+                                '/tvPage/$id/season/${seasons[index].seasonNumber}',
+                                arguments: {'showName': showName}),
                             child: Card(
                               color: Colors.white,
                               elevation: 5,
@@ -57,8 +63,9 @@ class SeasonHorizontalList extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: seasons[index].posterPath != null
-                                    ? Image.network(
-                                        '$IMAGE_BASE_URL${seasons[index].posterPath}',
+                                    ? CachedNetworkImage(
+                                        imageUrl:
+                                            '$IMAGE_BASE_URL${seasons[index].posterPath}',
                                         fit: BoxFit.fitWidth,
                                         width: 120,
                                         height: 120,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -15,23 +16,26 @@ class SeasonAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return SliverAppBar(
-      backgroundColor: Colors.black.withOpacity(0),
+      backgroundColor: Colors.transparent,
       iconTheme: IconTheme.of(context),
       pinned: true,
+      floating: true,
       elevation: 10,
       brightness: ThemeData().brightness,
       flexibleSpace: Row(
         children: [
           Container(
             width: width * 0.2,
+            color: Colors.transparent,
           ),
           Container(
+            color: Colors.transparent,
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
               child: seasonDetails.posterPath == null
                   ? Container()
-                  : Image.network(
-                      IMAGE_BASE_URL + seasonDetails.posterPath,
+                  : CachedNetworkImage(
+                      imageUrl: IMAGE_BASE_URL + seasonDetails.posterPath,
                       fit: BoxFit.fitWidth,
                     ),
             ),

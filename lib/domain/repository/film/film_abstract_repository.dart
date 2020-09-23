@@ -1,4 +1,5 @@
 import 'package:yshare/domain/entities/film.dart';
+import 'package:yshare/domain/entities/review.dart';
 
 abstract class FilmAbstractRepository {
   Future<Film> getFilmById(String id);
@@ -14,4 +15,6 @@ abstract class FilmAbstractRepository {
   Future<List<Film>> getTopRated(int page);
 
   Future<List<Map<String, dynamic>>> multiSearch(String param, int page);
+
+  Future<List<Review>> getFilmReview(String id, int page);
 }

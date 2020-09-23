@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yshare/domain/entities/production_companies.dart';
@@ -25,8 +26,8 @@ class ProductionCompanyCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: productionCompany.logoPath != null
-                  ? Image.network(
-                      '$IMAGE_BASE_URL${productionCompany.logoPath}',
+                  ? CachedNetworkImage(
+                      imageUrl: '$IMAGE_BASE_URL${productionCompany.logoPath}',
                       fit: BoxFit.fitWidth,
                       width: 120,
                       height: 120,

@@ -1,5 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -29,13 +30,60 @@ class _ActorPageAppBarState extends State<ActorPageAppBar> {
   @override
   void initState() {
     super.initState();
+
     interstitial = AdmobInterstitial(
-      adUnitId: 'ca-app-pub-8572242041813835/9563316676',
+      adUnitId: ACTOR_INTERSTICIAL,
       listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        if (event == AdmobAdEvent.closed) interstitial.load();
+        if (event == AdmobAdEvent.closed) {
+          interstitial.load();
+          showNotification();
+        }
       },
     );
     interstitial.load();
+  }
+
+  void showNotification() {
+    widget.controller.appController.subscribedActors
+            .contains(widget.actorDetails.id)
+        ? BotToast.showNotification(
+            title: (cancelFunc) => Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    EvaIcons.heart,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      Text('${widget.actorDetails.name} added in favourites !'),
+                ),
+              ],
+            ),
+          )
+        : BotToast.showNotification(
+            title: (cancelFunc) => Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    EvaIcons.heartOutline,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      '${widget.actorDetails.name} removed from favourites !'),
+                ),
+              ],
+            ),
+          );
   }
 
   @override
@@ -58,49 +106,8 @@ class _ActorPageAppBarState extends State<ActorPageAppBar> {
                     ),
               onPressed: () {
                 interstitial.show();
-
                 widget.controller.appController
                     .addActorInFavourites(int.parse(widget.id));
-                widget.controller.appController.subscribedActors
-                        .contains(int.parse(widget.id))
-                    ? BotToast.showNotification(
-                        title: (cancelFunc) => Wrap(
-                          direction: Axis.horizontal,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                EvaIcons.heart,
-                                color: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                  '${widget.actorDetails.name} added in favourites !'),
-                            ),
-                          ],
-                        ),
-                      )
-                    : BotToast.showNotification(
-                        title: (cancelFunc) => Wrap(
-                          direction: Axis.horizontal,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                EvaIcons.heartOutline,
-                                color: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                  '${widget.actorDetails.name} removed from favourites !'),
-                            ),
-                          ],
-                        ),
-                      );
               },
             );
           },
@@ -127,8 +134,9 @@ class _ActorPageAppBarState extends State<ActorPageAppBar> {
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
               child: widget.actorDetails.profilePath != null
-                  ? Image.network(
-                      IMAGE_BASE_URL + widget.actorDetails.profilePath,
+                  ? CachedNetworkImage(
+                      imageUrl:
+                          IMAGE_BASE_URL + widget.actorDetails.profilePath,
                       fit: BoxFit.fitWidth,
                     )
                   : Container(),

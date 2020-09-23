@@ -18,7 +18,17 @@ class FilmInfo extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              film.title,
+              style: TextStyle(
+                  fontFamily: GoogleFonts.poppins().fontFamily,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Center(
                 child: Text(film.tagline,
                     style: TextStyle(

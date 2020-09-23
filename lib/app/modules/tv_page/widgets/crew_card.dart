@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,8 +28,9 @@ class CrewCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: tv.createdBy[index].profilePath != null
-                  ? Image.network(
-                      '$IMAGE_BASE_URL${tv.createdBy[index].profilePath}',
+                  ? CachedNetworkImage(
+                      imageUrl:
+                          '$IMAGE_BASE_URL${tv.createdBy[index].profilePath}',
                       fit: BoxFit.fitWidth,
                       width: 120,
                       height: 120,

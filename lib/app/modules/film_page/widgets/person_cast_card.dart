@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,8 +33,8 @@ class PersonCastCard extends StatelessWidget {
                 child: cast.profilePath != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: Image.network(
-                          '$IMAGE_BASE_URL${cast.profilePath}',
+                        child: CachedNetworkImage(
+                          imageUrl: '$IMAGE_BASE_URL${cast.profilePath}',
                           fit: BoxFit.cover,
                           height: 100,
                         ),

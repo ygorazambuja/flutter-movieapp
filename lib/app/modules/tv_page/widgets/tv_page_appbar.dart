@@ -1,5 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -28,12 +29,56 @@ class _TvPageAppBarState extends State<TvPageAppBar> {
   void initState() {
     super.initState();
     interstitial = AdmobInterstitial(
-      adUnitId: 'ca-app-pub-8572242041813835/5029175293',
+      adUnitId: TV_INTERSTICIAL,
       listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        if (event == AdmobAdEvent.closed) interstitial.load();
+        if (event == AdmobAdEvent.closed) {
+          interstitial.load();
+          showNotification();
+        }
       },
     );
     interstitial.load();
+  }
+
+  void showNotification() {
+    widget.controller.appController.favouriteSeries.contains(widget.tv.id)
+        ? BotToast.showNotification(
+            title: (cancelFunc) => Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    EvaIcons.heart,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('${widget.tv.originalName} added in favourites!'),
+                ),
+              ],
+            ),
+          )
+        : BotToast.showNotification(
+            title: (cancelFunc) => Wrap(
+              direction: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    EvaIcons.heartOutline,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      '${widget.tv.originalName} removed from favourites !'),
+                ),
+              ],
+            ),
+          );
   }
 
   @override
@@ -58,50 +103,9 @@ class _TvPageAppBarState extends State<TvPageAppBar> {
                     EvaIcons.starOutline,
                     color: Colors.amber[800],
                   ),
-            onPressed: () {
-              interstitial.show();
+            onPressed: () async {
               widget.controller.appController.addSerieInFavourite(widget.tv.id);
-
-              widget.controller.appController.favouriteSeries
-                      .contains(widget.tv.id)
-                  ? BotToast.showNotification(
-                      title: (cancelFunc) => Wrap(
-                        direction: Axis.horizontal,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              EvaIcons.heart,
-                              color: Colors.red,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                '${widget.tv.originalName} added in favourites!'),
-                          ),
-                        ],
-                      ),
-                    )
-                  : BotToast.showNotification(
-                      title: (cancelFunc) => Wrap(
-                        direction: Axis.horizontal,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              EvaIcons.heartOutline,
-                              color: Colors.red,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                '${widget.tv.originalName} removed from favourites !'),
-                          ),
-                        ],
-                      ),
-                    );
+              await interstitial.show();
             },
           ),
         ),
@@ -112,9 +116,7 @@ class _TvPageAppBarState extends State<TvPageAppBar> {
                   EvaIcons.moon,
                   color: Colors.black,
                 ),
-          onPressed: () {
-            widget.controller.appController.changeTheme();
-          },
+          onPressed: () => widget.controller.appController.changeTheme(),
         )
       ],
       flexibleSpace: Row(
@@ -127,8 +129,8 @@ class _TvPageAppBarState extends State<TvPageAppBar> {
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(120)),
               child: widget.tv.posterPath == null
                   ? Container()
-                  : Image.network(
-                      IMAGE_BASE_URL + widget.tv.posterPath,
+                  : CachedNetworkImage(
+                      imageUrl: IMAGE_BASE_URL + widget.tv.posterPath,
                       fit: BoxFit.fitWidth,
                     ),
             ),

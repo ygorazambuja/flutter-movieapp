@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,8 +32,8 @@ class PersonFavouriteCard extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  '$IMAGE_BASE_URL${actorDetails.profilePath}',
+                child: CachedNetworkImage(
+                  imageUrl: '$IMAGE_BASE_URL${actorDetails.profilePath}',
                   fit: BoxFit.cover,
                   height: 150,
                 ),

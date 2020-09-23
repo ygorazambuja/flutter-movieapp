@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:yshare/app/app_controller.dart';
 import 'package:yshare/infra/repository/actor_details/actor_details_implementation_repository.dart';
+import 'package:yshare/infra/repository/episode/episode_implementation_repository.dart';
 import 'package:yshare/infra/repository/film/film_implementation_repository.dart';
 import 'package:yshare/infra/repository/tv/tv_implementation_repository.dart';
 
@@ -15,16 +16,13 @@ class HomeModule extends ChildModule {
               filmRepository: FilmImplementationRepository(),
               actorDetailsRepository: ActorDetailsImplementationRepository(),
               tvRepository: TvImplementationRepository(),
+              episodeRepository: EpisodeImplementationRepository(),
             ))
       ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter(
-          Modular.initialRoute,
-          child: (_, args) => HomePage(),
-        ),
-      ];
+  List<ModularRouter> get routers =>
+      [ModularRouter(Modular.initialRoute, child: (_, args) => HomePage())];
 
   static Inject get to => Inject<HomeModule>.of();
 }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -27,25 +28,25 @@ class CardFilm extends StatelessWidget {
           InkWell(
             onTap: () => Modular.to.pushNamed('/filmPage/${film.id}'),
             child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              borderOnForeground: false,
-              elevation: 10,
-              clipBehavior: Clip.antiAlias,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  '$IMAGE_BASE_URL${film.posterPath}',
-                  fit: BoxFit.cover,
-                  height: 160,
-                ),
-              ),
-            ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                borderOnForeground: false,
+                elevation: 10,
+                clipBehavior: Clip.antiAlias,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: CachedNetworkImage(
+                    imageUrl: '$IMAGE_BASE_URL${film.posterPath}',
+                    fit: BoxFit.cover,
+                    height: 160,
+                  ),
+                )),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 2.0),
             child: Text(
               '${film.title}',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
                 fontWeight: FontWeight.bold,

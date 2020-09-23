@@ -15,10 +15,11 @@ GuestStar _$GuestStarFromJson(Map<String, dynamic> json) {
     order: json['order'] as int,
     gender: json['gender'] as int,
     profilePath: json['profile_path'] as String,
-  );
+  )..castId = json['cast_id'] as int;
 }
 
 Map<String, dynamic> _$GuestStarToJson(GuestStar instance) => <String, dynamic>{
+      'cast_id': instance.castId,
       'id': instance.id,
       'name': instance.name,
       'credit_id': instance.creditId,
