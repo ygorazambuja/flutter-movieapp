@@ -21,6 +21,7 @@ class FilmInfo extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               film.title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: GoogleFonts.poppins().fontFamily,
                   fontSize: 24,
