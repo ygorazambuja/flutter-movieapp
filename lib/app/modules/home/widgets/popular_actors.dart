@@ -46,7 +46,7 @@ class PopularActors extends StatelessWidget {
                             fontSize: 20)),
                   ),
                   Container(
-                    height: 300,
+                    height: 220,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
                         Radius.circular(100),

@@ -44,3 +44,4 @@ android/app/key.jks
 android/key.properties
 android/app/google-services.json
 web/firebaseConfig.js
+android/key.jks
