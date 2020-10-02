@@ -49,7 +49,7 @@ class FilmPageCrewList extends StatelessWidget {
                                 fontSize: 18)),
                       ),
                       Container(
-                        height: 170,
+                        height: 200,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,

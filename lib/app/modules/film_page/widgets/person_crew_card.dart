@@ -31,14 +31,14 @@ class PersonCrewCard extends StatelessWidget {
                       ? CachedNetworkImage(
                           imageUrl: '$IMAGE_BASE_URL${crew.profilePath}',
                           fit: BoxFit.cover,
-                          height: 100,
+                          height: 150,
                         )
                       : Image.asset(
                           crew.gender == 2
                               ? 'assets/images/male_placeholder.jpg'
                               : 'assets/images/female_placeholder.jpg',
                           fit: BoxFit.cover,
-                          height: 100,
+                          height: 150,
                         ),
                 ),
               ),

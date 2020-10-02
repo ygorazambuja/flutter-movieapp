@@ -36,7 +36,7 @@ class PersonCastCard extends StatelessWidget {
                         child: CachedNetworkImage(
                           imageUrl: '$IMAGE_BASE_URL${cast.profilePath}',
                           fit: BoxFit.cover,
-                          height: 100,
+                          height: 150,
                         ),
                       )
                     : ClipRRect(
@@ -45,12 +45,12 @@ class PersonCastCard extends StatelessWidget {
                             ? Image.asset(
                                 'assets/images/male_placeholder.jpg',
                                 fit: BoxFit.cover,
-                                height: 100,
+                                height: 150,
                               )
                             : Image.asset(
                                 'assets/images/female_placeholder.jpg',
                                 fit: BoxFit.cover,
-                                height: 100,
+                                height: 150,
                               ))),
           ),
           Padding(

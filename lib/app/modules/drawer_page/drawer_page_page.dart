@@ -68,7 +68,8 @@ class _DrawerPagePageState
                       style: TextStyle(
                           fontFamily: GoogleFonts.aBeeZee().fontFamily,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                          fontSize: 16,
+                          color: Colors.white),
                     ),
                   ),
                 ),

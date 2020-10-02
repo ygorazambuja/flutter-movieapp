@@ -67,8 +67,8 @@ class _SearchPagePageState
               child: GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 250,
-                  childAspectRatio: 1,
+                  maxCrossAxisExtent: MediaQuery.of(context).size.width / 2,
+                  childAspectRatio: 0.9,
                 ),
                 itemCount: controller.films.length,
                 physics: BouncingScrollPhysics(),

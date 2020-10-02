@@ -11,15 +11,14 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.2+2
+version: 1.1.2+3
 
 environment:
-    sdk: ">=2.2.2 <3.0.0"
+    sdk: '>=2.2.2 <3.0.0'
 
 dependencies:
     flutter:
         sdk: flutter
-
 
     admob_flutter: ^0.3.4
     firebase_core:
@@ -37,7 +36,6 @@ dependencies:
     flutter_launcher_icons: 0.7.5
     random_color: 1.0.5
     cached_network_image: 2.3.2+1
-
 
     # The following adds the Cupertino Icons font to your application.
     # Use with the CupertinoIcons class for iOS style icons.
@@ -66,6 +64,6 @@ scripts:
     build: flutter pub run build_runner build --delete-conflicting-outputs
 
 flutter_icons:
-    android: "launcher_icon"
+    android: 'launcher_icon'
     ios: true
-    image_path: "assets/images/yshare-logo.png"
+    image_path: 'assets/images/yshare-logo.png'

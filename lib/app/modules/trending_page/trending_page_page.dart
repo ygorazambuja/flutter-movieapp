@@ -87,8 +87,8 @@ class _TrendingPagePageState
               child: GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 0.6,
+                  maxCrossAxisExtent: 250,
+                  childAspectRatio: 0.9,
                 ),
                 itemCount: controller.films.length,
                 physics: BouncingScrollPhysics(),

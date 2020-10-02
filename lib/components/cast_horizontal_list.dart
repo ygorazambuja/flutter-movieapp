@@ -39,7 +39,7 @@ class CastHorizontalList extends StatelessWidget {
                           fontSize: 18)),
                 ),
                 Container(
-                  height: 160,
+                  height: 200,
                   child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
